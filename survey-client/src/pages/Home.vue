@@ -1,36 +1,41 @@
 <template>
-    <Logo/>
-    <div class="start-aligned-image">
-        <div class="container-element">
-            {{ $t('name') }}: <input v-model="state.form.name"/>
+    <div class="container">
+        <Logo/>
+        <div class="start-aligned-image">
+            <div class="container-element">
+                {{ $t('name') }}: <input v-model="state.form.name"/>
+            </div>
+            <div class="container-element">
+                {{ $t('company') }}: <input v-model="state.form.company"/>
+            </div>
+            <div class="container-element">
+                {{ $t('email') }}: <input v-model="state.form.email"/>
+            </div>
+            <div class="container-element">
+                {{ $t('industry') }}:
+                <select v-model="state.form.industry">
+                    <option>{{ $t('confectionary') }}</option>
+                    <option>{{ $t('dessert') }}</option>
+                    <option>{{ $t('hmr') }}</option>
+                    <option>{{ $t('alternativeFood') }}</option>
+                    <option>{{ $t('etc') }}</option>
+                </select>
+            </div>
         </div>
-        <div class="container-element">
-            {{ $t('company') }}: <input v-model="state.form.company"/>
-        </div>
-        <div class="container-element">
-            {{ $t('email') }}: <input v-model="state.form.email"/>
-        </div>
-        <div class="container-element">
-            {{ $t('industry') }}:
-            <select v-model="state.form.industry">
-                <option>{{ $t('confectionary') }}</option>
-                <option>{{ $t('dessert') }}</option>
-                <option>{{ $t('hmr') }}</option>
-                <option>{{ $t('alternativeFood') }}</option>
-                <option>{{ $t('etc') }}</option>
-            </select>
-        </div>
-        <div class="container-element-agree">
-            <p></p>
-            {{ $t('consent') }}<br>
-            <input type="radio" value="true" v-model="selected">
-            <label for="one">{{ $t('agree') }}</label>
-            <span></span>
-            <input type="radio" value="false" v-model="selected">
-            <label for="one">{{ $t('disagree') }}</label>
-        </div>
-        <br>
-        <button class="btn btn-primary w-300 py-2" @click="submit()">{{ $t('submit') }}</button>
+    </div>
+    <div class="container-element-agree">
+        <p></p>
+        {{ $t('consent') }}<br>
+        <input type="radio" v-bind:value="true" v-model="selected">
+        <label for="one">{{ $t('agree') }}</label>
+        <span></span>
+        <input type="radio" v-bind:value="false" v-model="selected">
+        <label for="one">{{ $t('disagree') }}</label>
+    </div>
+    <br>
+    <div class="submit-butten">
+        <button v-if="!selected" class="btn btn-primary w-300 py-2" style="background-color: gray" >{{ $t('submit') }}</button>
+        <button v-if="selected" class="btn btn-primary w-300 py-2" style="background-color: red" @click="submit()">{{ $t('submit') }}</button>
     </div>
 </template>
 
@@ -66,14 +71,23 @@ export default {
             })
         }
         return {state, submit}
+    },
+    data(){
+      return {
+          selected: false, //radio 버튼의 디폴트 값 설정
+          true: true,
+          false: false
+
+      }
     }
 }
 </script>
 
 <style scoped>
-.locale{
-    text-align: right;
+.container {
+    position: relative;
 }
+
 .start-aligned-image {
 
     text-align: center;
@@ -87,5 +101,11 @@ export default {
 .container-element-agree {
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+.submit-butten {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 </style>

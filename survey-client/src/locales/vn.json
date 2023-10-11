@@ -1,0 +1,17 @@
+{
+  "name":"tên",
+  "company":"tên công ty",
+  "email":"thư điện tử",
+  "industry":"công nghiệp",
+  "successText": "Đăng ký đã hoàn tất! \\n Cho nhân viên xem màn hình này, \\n nhận phần thưởng đi! \\n Cảm ơn",
+  "duplicateText": "Xin lỗi, Email này đã được đăng ký",
+  "consent": "Bạn có đồng ý thu thập và sử dụng thông tin cá nhân như đã mô tả ở trên không?",
+  "agree": "đồng ý",
+  "disagree": "không đồng ý kiến",
+  "submit": "quy phục",
+  "confectionary": "người làm bánh kẹo",
+  "dessert": "Món tráng miệng",
+  "hmr": "Bữa ăn thay thế tại nhà",
+  "alternativeFood": "Thực phẩm thay thế",
+  "etc": "vân vân"
+}

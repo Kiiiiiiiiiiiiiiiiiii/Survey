@@ -1,6 +1,9 @@
 <template>
-  {{ $t('successText') }}<br>
-  <Logo/>
+    <div class="message">
+        {{ $t('successText') }}<br>
+        <img class="img" alt="img" src="../assets/success.png">
+    </div>
+    <Logo/>
 </template>
 
 <script>
@@ -13,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.bi-emoji-smile-fill {
-    color: yellow;
+.message {
+    text-align: center;
 }
 </style>

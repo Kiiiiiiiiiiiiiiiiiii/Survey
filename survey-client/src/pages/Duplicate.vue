@@ -1,6 +1,11 @@
 <template>
-  {{ $t('duplicateText') }}<br>
-  <Logo/>
+    <div class="message">
+        {{ $t('duplicateText') }}<br>
+        <img class="img" alt="img" src="../assets/fail.png">
+    </div>
+
+    <Logo/>
+
 </template>
 
 <script>
@@ -13,4 +18,7 @@ export default {
 </script>
 
 <style scoped>
+.message {
+    text-align: center;
+}
 </style>

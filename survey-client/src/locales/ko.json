@@ -1,0 +1,17 @@
+{
+  "name":"성함",
+  "company":"회사명",
+  "email":"이메일",
+  "industry":"산업",
+  "successText": "등록 완료! \\n 직원에게 이 화면을 보여드리고, \\n 보상받으세요! \\n 감사합니다",
+  "duplicateText": "죄송합니다, \\n 해당 메일은 \\n 이미 등록되어 있습니다.",
+  "consent": "위와 같이 개인 정보를 수집하고 사용하는 것에 동의하십니까?",
+  "agree": "동의",
+  "disagree": "비동의",
+  "submit": "제출",
+  "confectionary": "과자",
+  "dessert": "디저트",
+  "hmr": "가정간편식",
+  "alternativeFood": "대체 식품",
+  "etc": "기타"
+}
