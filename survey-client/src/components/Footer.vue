@@ -1,5 +1,5 @@
 <template>
-   footer
+   <img alt="logo" src="../assets/logo.png">
 </template>
 
 <script>

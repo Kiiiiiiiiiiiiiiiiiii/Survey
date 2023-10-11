@@ -1,10 +1,14 @@
 <template>
-  Duplicate page
+  {{ $t('duplicateText') }}<br>
+  <Logo/>
 </template>
 
 <script>
+import Logo from "@/components/Logo.vue";
+
 export default {
-    name: "Duplicate"
+    name: "Duplicate",
+    components: {Logo}
 }
 </script>
 

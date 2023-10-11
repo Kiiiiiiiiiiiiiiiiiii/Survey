@@ -4,16 +4,17 @@ import {createRouter, createWebHistory} from 'vue-router'
 import Home from "@/pages/Home.vue";
 import Success from "@/pages/Success.vue";
 import Duplicate from "@/pages/Duplicate.vue";
+import {i18n} from "@/i18n/i18n";
 
 const routes = [
     {
-        path: '/', component: Home
+        path: '/', name: 'Home', component: Home
     },
     {
-        path: '/success', component: Success
+        path: '/success', name: 'success', component: Success
     },
     {
-        path: '/duplicate', component: Duplicate
+        path: '/duplicate', name: 'duplicate', component: Duplicate
     }
 ]
 
@@ -22,4 +23,4 @@ const router = createRouter(({
     routes
 }))
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(i18n).mount('#app')
