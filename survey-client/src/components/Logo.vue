@@ -26,5 +26,6 @@ export default {
     align-items: center;
     max-width: 100%;
     height: auto;
+    text-align: center;
 }
 </style>
