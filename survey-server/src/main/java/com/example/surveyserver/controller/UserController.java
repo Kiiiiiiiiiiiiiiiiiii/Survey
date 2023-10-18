@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
+
 import com.example.surveyserver.util.DateUtils;
 
 @RestController
@@ -25,6 +25,7 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     TimeConfig timeConfig;
+
     @PostMapping("/api/submit")
     @Transactional
     public Boolean submit(@RequestBody Map<String, String> params) throws ParseException {
@@ -36,6 +37,7 @@ public class UserController {
             newUser.setEmail(userEmail);
             newUser.setIndustry(params.get("industry"));
             newUser.setDateCreated(timeConfig.getVTNTime());
+            newUser.setBranchId(Integer.parseInt(params.get("branchId")));
             userRepository.save(newUser);
             return true;
         }
@@ -45,7 +47,7 @@ public class UserController {
     @PostMapping("/api/check")
     public boolean checkEmail(String email) {
         User user = userRepository.findByEmail(email);
-        if (user != null){
+        if (user != null) {
             return true;
         }
         return false;
@@ -53,6 +55,7 @@ public class UserController {
 
     /**
      * 전체 등록 유저수 조회
+     *
      * @return result
      */
     @GetMapping("/api/total")
@@ -72,4 +75,35 @@ public class UserController {
         return result;
     }
 
+    @GetMapping("/api/test")
+    public Object resultTest() {
+        Map<String, Long> results = new HashMap<String, Long>();
+
+        long krTotalCnt = 0;
+        long vnTotalCnt = 0;
+        long krDailyCnt = 0;
+        long vnDailyCnt = 0;
+        Date now = new Date();
+
+        krTotalCnt = userRepository.countAllByBranchId(1);
+        vnTotalCnt = userRepository.countAllByBranchId(2);
+        krDailyCnt = userRepository.countAllByDateCreatedBetweenAndBranchId(DateUtils.clearDate(now), DateUtils.clearDate(DateUtils.addDay(now, 1)), 1);
+        vnDailyCnt = userRepository.countAllByDateCreatedBetweenAndBranchId(DateUtils.clearDate(now), DateUtils.clearDate(DateUtils.addDay(now, 1)), 2);
+
+        results.put("krTotalCnt", krTotalCnt);
+        results.put("vnTotalCnt", vnTotalCnt);
+        results.put("krDailyCnt", krDailyCnt);
+        results.put("vnDailyCnt", vnDailyCnt);
+
+
+        return results;
+    }
+
+    @GetMapping("/api/getAllData")
+    public List<User> getAllData() {
+        List<User> results;
+        results = userRepository.findAllBy();
+
+        return results;
+    }
 }
