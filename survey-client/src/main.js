@@ -8,9 +8,15 @@ import {i18n} from "@/i18n/i18n";
 import Result from "@/pages/Result.vue";
 
 const routes = [
-    /*{
-        path: '/', name: 'Home', component: Home
-    },*/
+    {
+        path: '/', redirect: 'main?branchId=1'
+    },
+    {
+        path: '/kr', redirect: 'main?branchId=1'
+    },
+    {
+        path: '/vn', redirect: 'main?branchId=2'
+    },
     {
         path: '/main', name: 'Home', component: Home
     },
@@ -22,6 +28,9 @@ const routes = [
     },
     {
         path: '/result', name: 'result', component: Result
+    },
+    {
+        path: '/:catchAll(.*)', redirect: 'main'
     }
 ]
 
