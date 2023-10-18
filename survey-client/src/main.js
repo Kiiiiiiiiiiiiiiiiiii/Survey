@@ -5,16 +5,23 @@ import Home from "@/pages/Home.vue";
 import Success from "@/pages/Success.vue";
 import Duplicate from "@/pages/Duplicate.vue";
 import {i18n} from "@/i18n/i18n";
+import Result from "@/pages/Result.vue";
 
 const routes = [
-    {
+    /*{
         path: '/', name: 'Home', component: Home
+    },*/
+    {
+        path: '/main', name: 'Home', component: Home
     },
     {
         path: '/success', name: 'success', component: Success
     },
     {
         path: '/duplicate', name: 'duplicate', component: Duplicate
+    },
+    {
+        path: '/result', name: 'result', component: Result
     }
 ]
 
