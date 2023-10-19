@@ -84,7 +84,7 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/api/test")
+    @GetMapping("/api/stat")
     public Object resultTest() {
         Map<String, Long> results = new HashMap<String, Long>();
 
@@ -104,11 +104,10 @@ public class UserController {
         results.put("krDailyCnt", krDailyCnt);
         results.put("vnDailyCnt", vnDailyCnt);
 
-
         return results;
     }
 
-    @GetMapping("/api/getAllData")
+    @GetMapping("/api/getAllUserData")
     public List<User> getAllData() {
         List<User> results;
         results = userRepository.findAllBy();
