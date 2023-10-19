@@ -33,4 +33,7 @@ public class User {
     @Column
     private int branchId;
 
+    @Column
+    private String branchName;
+
 }

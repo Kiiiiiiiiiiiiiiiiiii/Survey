@@ -1,7 +1,9 @@
 package com.example.surveyserver.controller;
 
 import com.example.surveyserver.config.TimeConfig;
+import com.example.surveyserver.entity.Branch;
 import com.example.surveyserver.entity.User;
+import com.example.surveyserver.repository.BranchRepository;
 import com.example.surveyserver.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
     @Autowired
+    BranchRepository branchRepository;
+    @Autowired
     TimeConfig timeConfig;
 
     @PostMapping("/api/submit")
@@ -31,13 +35,18 @@ public class UserController {
     public Boolean submit(@RequestBody Map<String, String> params) throws ParseException {
         String userEmail = params.get("email");
         if (!checkEmail(userEmail)) {
+            int branchId = Integer.parseInt(params.get("branchId"));
+            Branch branch = branchRepository.findById(branchId);
+            String branchName = branch.getName();
+
             User newUser = new User();
             newUser.setName(params.get("name"));
             newUser.setCompany(params.get("company"));
             newUser.setEmail(userEmail);
             newUser.setIndustry(params.get("industry"));
             newUser.setDateCreated(timeConfig.getVTNTime());
-            newUser.setBranchId(Integer.parseInt(params.get("branchId")));
+            newUser.setBranchId(branchId);
+            newUser.setBranchName(branchName);
             userRepository.save(newUser);
             return true;
         }
