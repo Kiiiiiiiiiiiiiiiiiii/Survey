@@ -4,8 +4,11 @@
         <div class="grid-container">
             {{ $t('name') }} : <input class="input-element" v-model="state.form.name"/>
             {{ $t('company') }} : <input class="input-element" v-model="state.form.company"/>
-            {{ $t('email') }} : <input class="input-element" :class="{'input-danger': emailHasError }" v-model="state.form.email"/>
-<!--            <p v-show="valid.email" class="input-error"> 이메일 오류 </p>-->
+            {{ $t('email') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
+                                       v-model="state.form.email"/>
+            <!--            <p v-show="valid.email" class="input-error"> 이메일 오류 </p>-->
+            {{ $t('phone') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
+                                       v-model="state.form.phone"/>
             {{ $t('industry') }} :
             <select class="input-element" v-model="state.form.industry">
                 <option>{{ $t('confectionary') }}</option>
@@ -31,11 +34,13 @@
         <br>
         <div class="submit-butten">
             <button v-if="!selected" class="btn btn-primary w-300 py-2" style="background-color: gray">{{
-                $t('submit')
+                $t('next')
                 }}
             </button>
-            <button v-if="selected" class="btn btn-primary w-300 py-2" style="background-color: red" @click="submit()">
-                {{ $t('submit') }}
+            <!--            <button v-if="selected" class="btn btn-primary w-300 py-2" style="background-color: red" @click="submit()">-->
+            <button v-if="selected" class="btn btn-primary w-300 py-2" style="background-color: red"
+                    @click="submit">
+                {{ $t('next') }}
             </button>
         </div>
     </div>
@@ -43,7 +48,7 @@
 
 <script>
 
-import {reactive, onBeforeMount} from "vue";
+import {reactive} from "vue";
 import axios from "axios";
 import Logo from "@/components/Logo.vue";
 import {useRouter} from "vue-router";
@@ -52,31 +57,24 @@ export default {
     components: {Logo},
     setup() {
         const router = useRouter()
-        console.log('1. router : ',router)
-        console.log('2. route : ', router.currentRoute.value.query.branchId)
         const state = reactive({
             form: {
                 name: "",
                 company: "",
                 email: "",
+                phone: "",
                 industry: "",
                 branchId: router.currentRoute.value.query.branchId
             }
         })
 
-        onBeforeMount(() =>{
-            console.log('onBeforeMount start')
-            /*console.log('route :', query)
-            if (query.branchId) {
-                state.form.branchId = query.branchId;
-            }*/
-        });
-
         const submit = () => {
             axios.post("/api/submit", state.form).then((res) => {
-                console.log(res.data)
                 if (res.data) {
-                    router.push({name: 'success'});
+                    /*const Params = { state: JSON.stringify(state.form)}
+                    console.log('params : ', Params)*/
+                    /*router.push({name: 'success'});*/
+                    router.push({name: 'imageUpload', state: state.form});
                 } else {
                     router.push({name: 'duplicate'});
                 }
@@ -86,6 +84,7 @@ export default {
     },
     data() {
         return {
+            modalActive: false,
             selected: false, //radio 버튼의 디폴트 값 설정
             true: true,
             false: false,
@@ -93,9 +92,10 @@ export default {
             valid: {
                 email: false
             }
+
         }
     },
-    methods:{
+    methods: {
         checkemail() {
             console.log('checkEmail start')
             const validateEmail = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-Za-z0-9\\-]+/
@@ -162,5 +162,30 @@ export default {
     line-height: 16px;
     font-size: 11px;
     color: $color-error;
+}
+
+.black-bg {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.432);
+    position: fixed;
+    padding: 20px;
+}
+
+.white-bg {
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.modal-exit-btn {
+    margin-top: 30px;
+}
+
+.modal-exit-btn:hover {
+    cursor: pointer;
 }
 </style>

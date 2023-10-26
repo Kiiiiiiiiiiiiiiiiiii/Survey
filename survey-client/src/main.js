@@ -6,6 +6,7 @@ import Success from "@/pages/Success.vue";
 import Duplicate from "@/pages/Duplicate.vue";
 import {i18n} from "@/i18n/i18n";
 import Result from "@/pages/Result.vue";
+import imageUpload from "@/pages/ImageUpload.vue";
 
 const routes = [
     {
@@ -19,6 +20,9 @@ const routes = [
     },
     {
         path: '/main', name: 'Home', component: Home
+    },
+    {
+        path: '/imageUpload', name: 'imageUpload', component: imageUpload
     },
     {
         path: '/success', name: 'success', component: Success
