@@ -1,8 +1,11 @@
 package com.example.surveyserver.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -28,6 +31,7 @@ public class User {
     private String industry;
 
     @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date dateCreated;
 
     @Column
@@ -36,4 +40,6 @@ public class User {
     @Column
     private String branchName;
 
+    @Column
+    private String phone;
 }

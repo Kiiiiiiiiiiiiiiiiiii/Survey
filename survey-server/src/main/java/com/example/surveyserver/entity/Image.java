@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Branch {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,5 +16,8 @@ public class Branch {
     private String name;
 
     @Column
-    private String imgPath;
+    private int branchId;
+
+    @Column
+    private int userId;
 }
