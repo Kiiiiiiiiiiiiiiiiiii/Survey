@@ -146,6 +146,14 @@ public class UserController {
         return results;
     }
 
+    @GetMapping("/api/getBranchUser")
+    public List<User> getBranchUser(@RequestParam("branchId") int branchId) {
+        List<User> results;
+        results = userRepository.findAllByBranchId(branchId);
+
+        return results;
+    }
+
 
     @PostMapping("/api/imageUpload")
     public String uploadImage(@RequestParam("image") MultipartFile image, @RequestParam("email") String email, @RequestParam("branchId") int branchId) {
