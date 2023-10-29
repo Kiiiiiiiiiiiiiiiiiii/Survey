@@ -38,7 +38,7 @@ public class User {
     private int branchId;
 
     @Column
-    private String branchName;
+    private String branchCode;
 
     @Column
     private String phone;

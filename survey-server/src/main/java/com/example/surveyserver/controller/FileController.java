@@ -44,15 +44,15 @@ public class FileController {
     public ResponseEntity<FileSystemResource> downloadZipFile(@RequestParam("branchId") int branchId) {
         Branch branch = branchRepository.findById(branchId);
         String imgPath = branch.getImgPath();
-        String branchName = branch.getName();
+        String branchCode = branch.getCode();
 
         FileZipUtils fileZipUtils = new FileZipUtils();
-        fileZipUtils.zip(imgPath, branchName);
+        fileZipUtils.zip(imgPath, branchCode);
 
-        FileSystemResource zipFile = new FileSystemResource(imgPath + "/namecardimg_" + branchName + ".zip");
+        FileSystemResource zipFile = new FileSystemResource(imgPath + "/namecardimg_" + branchCode + ".zip");
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=namecardimg_" + branchName + ".zip");
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=namecardimg_" + branchCode + ".zip");
         return ResponseEntity.ok()
                 .headers(headers)
                 .contentType(MediaType.parseMediaType("application/zip"))

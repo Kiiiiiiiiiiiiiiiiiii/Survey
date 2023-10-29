@@ -41,7 +41,7 @@ public class UserController {
         if (!checkEmail(userEmail)) {
             int branchId = Integer.parseInt(params.get("branchId"));
             Branch branch = branchRepository.findById(branchId);
-            String branchName = branch.getName();
+            String branchCode = branch.getCode();
 
             User newUser = new User();
             newUser.setName(params.get("name"));
@@ -50,7 +50,7 @@ public class UserController {
             newUser.setIndustry(params.get("industry"));
             newUser.setDateCreated(timeConfig.getVTNTime());
             newUser.setBranchId(branchId);
-            newUser.setBranchName(branchName);
+            newUser.setBranchCode(branchCode);
             newUser.setPhone(params.get("phone"));
             userRepository.save(newUser);
             return true;

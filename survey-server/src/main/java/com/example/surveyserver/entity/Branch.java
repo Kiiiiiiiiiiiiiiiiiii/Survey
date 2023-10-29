@@ -16,5 +16,8 @@ public class Branch {
     private String name;
 
     @Column
+    private String code;
+
+    @Column
     private String imgPath;
 }

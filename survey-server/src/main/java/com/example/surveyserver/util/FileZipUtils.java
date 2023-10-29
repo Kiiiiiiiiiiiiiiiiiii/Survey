@@ -13,11 +13,11 @@ public class FileZipUtils {
     /***
      * Zip 파일 생성
      * @param path
-     * @param branchName
+     * @param branchCode
      */
-    public void zip(String path, String branchName) {
+    public void zip(String path, String branchCode) {
         File file_ = new File(path);
-        String fileName = "namecardimg_" + branchName + ".zip";
+        String fileName = "namecardimg_" + branchCode + ".zip";
         existZip(path, fileName);
         File[] listFiles = file_.listFiles();
 
