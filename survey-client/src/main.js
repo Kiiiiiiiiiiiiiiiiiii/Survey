@@ -7,16 +7,21 @@ import Duplicate from "@/pages/Duplicate.vue";
 import {i18n} from "@/i18n/i18n";
 import Result from "@/pages/Result.vue";
 import imageUpload from "@/pages/ImageUpload.vue";
+import FrontImageKR from "@/pages/FrontImageKR.vue";
+import FrontImageVN from "@/pages/FrontImageVN.vue";
+
 
 const routes = [
     {
         path: '/', redirect: 'main?branchId=1'
     },
     {
-        path: '/kr', redirect: 'main?branchId=1'
+        path: '/kr', name: 'FrontImageKR', component: FrontImageKR
+        /*path: '/kr', redirect: 'main?branchId=1'*/
     },
     {
-        path: '/vn', redirect: 'main?branchId=2'
+        path: '/vn', name: 'FrontImageVN', component: FrontImageVN
+        /*path: '/vn', redirect: 'main?branchId=2'*/
     },
     {
         path: '/main', name: 'Home', component: Home
