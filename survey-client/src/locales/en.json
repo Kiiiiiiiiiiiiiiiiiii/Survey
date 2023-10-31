@@ -2,9 +2,11 @@
   "name":"Name",
   "company":"Company",
   "email":"E-Mail",
+  "phone":"Mobile",
   "industry":"Industry",
-  "successText": "Registration is complete! \n Show this screen to the staff, \n Get the reward! \n\n Thank you\n",
-  "duplicateText": "Sorry, \n This email has already \n been registered",
+  "successText": "Registration is complete! \n Show this screen to the staff, \n Get the reward! \n",
+  "thx": "Thank you",
+  "duplicateText": "Sorry, \n This email has already \n been registered.",
   "consent": "Do you agree to the collection and \n use of your private information as described above?",
   "agree": "Agree",
   "disagree": "Disagree",
@@ -13,5 +15,6 @@
   "dessert": "Dessert",
   "hmr": "HMR",
   "alternativeFood": "Alternative Food",
-  "etc": "ETC"
+  "etc": "ETC",
+  "upload": "Please upload \n your name card"
 }
