@@ -1,47 +1,62 @@
 <template>
+    <div class="main-title-container">
+        <div class="title-img">
+            <img class="img" src="../assets/main-title-kr.png" v-if="state.form.branchId == 1">
+            <img class="img" src="../assets/main-title-vn.png" v-if="state.form.branchId == 2">
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
     <div class="home-main-container">
-        <Logo/>
-        <div class="grid-container">
-            {{ $t('name') }} : <input class="input-element" v-model="state.form.name"/>
-            {{ $t('company') }} : <input class="input-element" v-model="state.form.company"/>
-            {{ $t('email') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
-                                       v-model="state.form.email"/>
-            <!--            <p v-show="valid.email" class="input-error"> 이메일 오류 </p>-->
-            {{ $t('phone') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
-                                       v-model="state.form.phone"/>
-            {{ $t('industry') }} :
-            <select class="input-element" v-model="state.form.industry">
-                <option>{{ $t('confectionary') }}</option>
-                <option>{{ $t('dessert') }}</option>
-                <option>{{ $t('hmr') }}</option>
-                <option>{{ $t('alternativeFood') }}</option>
-                <option>{{ $t('etc') }}</option>
-            </select>
-        </div>
+        <div>
+            <div class="grid-container">
+                {{ $t('name') }} : <input class="input-element" v-model="state.form.name"/>
+                {{ $t('company') }} : <input class="input-element" v-model="state.form.company"/>
+                {{ $t('email') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
+                                           v-model="state.form.email"/>
+                <!--            <p v-show="valid.email" class="input-error"> 이메일 오류 </p>-->
+                {{ $t('phone') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
+                                           v-model="state.form.phone"/>
+                {{ $t('industry') }} :
+                <select class="input-element" v-model="state.form.industry">
+                    <option>{{ $t('confectionary') }}</option>
+                    <option>{{ $t('dessert') }}</option>
+                    <option>{{ $t('hmr') }}</option>
+                    <option>{{ $t('alternativeFood') }}</option>
+                    <option>{{ $t('etc') }}</option>
+                </select>
+            </div>
 
-        <div class="container-element-agree">
-            <p></p>
-            {{ $t('consent') }}
+            <div class="container-element-agree">
+                <p></p>
+                <span class="consent-text">{{ $t('consent') }}</span>
+                <br>
+                <br>
+                <div class="flex-container">
+                    <div class="flex-item-disagree">
+                        <input type="radio" v-bind:value="true" v-model="selected">
+                        <label for="one">{{ $t('agree') }}</label>
+                    </div>
+                    <span></span>
+                    <div class="flex-item-agree">
+                        <input type="radio" v-bind:value="false" v-model="selected">
+                        <label for="one">{{ $t('disagree') }}</label>
+                    </div>
+                </div>
+            </div>
             <br>
             <br>
-            <input type="radio" v-bind:value="true" v-model="selected">
-            <label for="one">{{ $t('agree') }}</label>
-            <span></span>
-            <input type="radio" v-bind:value="false" v-model="selected">
-            <label for="one">{{ $t('disagree') }}</label>
+            <div class="submit-buttons">
+                <img src="../assets/disable_submit_btn.png" v-if="!selected" class="submit-button">
+                <img src="../assets/submit_btn.png" v-if="selected" class="submit-button" @click="submit">
+            </div>
         </div>
-        <br>
-        <br>
-        <div class="submit-butten">
-            <button v-if="!selected" class="btn btn-primary w-300 py-2" style="background-color: gray">{{
-                $t('next')
-                }}
-            </button>
-            <!--            <button v-if="selected" class="btn btn-primary w-300 py-2" style="background-color: red" @click="submit()">-->
-            <button v-if="selected" class="btn btn-primary w-300 py-2" style="background-color: red"
-                    @click="submit">
-                {{ $t('next') }}
-            </button>
+        <div class="footer-logo">
+            <Footer/>
         </div>
     </div>
 </template>
@@ -50,11 +65,11 @@
 
 import {reactive} from "vue";
 import axios from "axios";
-import Logo from "@/components/Logo.vue";
 import {useRouter} from "vue-router";
+import Footer from "@/components/Footer.vue";
 
 export default {
-    components: {Logo},
+    components: {Footer/*, Logo*/},
     setup() {
         const router = useRouter()
         const state = reactive({
@@ -92,7 +107,6 @@ export default {
             valid: {
                 email: false
             }
-
         }
     },
     methods: {
@@ -122,11 +136,22 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+    font-family: NotoSans-Bold;
+    src: url("../assets/fonts/NotoSans-Bold.ttf");
+}
+
 .home-main-container {
     overflow: hidden; /* 스크롤을 숨깁니다. */
     position: fixed;
-    height: 100%;
-    max-height: 100%;
+    width: 100vw;
+    height: auto;
+    /*    아래 3개 추가로 이미지 하단중앙에 고정*/
+    justify-content: center;
+    align-items: flex-start; /* 세로 정렬은 위쪽에 맞춥니다. */
+    display: flex;
+
+
 }
 
 .grid-container {
@@ -134,10 +159,11 @@ export default {
     grid-template-columns: 1fr 1fr; /* 2x2 그리드 생성 */
     gap: 10px; /* 그리드 아이템 간의 간격 설정 */
     text-align: center;
+    font-family: NotoSans-Bold
 }
 
 .input-element {
-    max-width: 80%;
+    width: 40vw;
 }
 
 .container-element-agree {
@@ -146,9 +172,10 @@ export default {
     text-align: center;
     font-size: 2vh;
     white-space: pre-wrap; /*\n을 줄바꿈으로 치환*/
+    font-family: NotoSans-Bold;
 }
 
-.submit-butten {
+.submit-buttons {
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -164,28 +191,52 @@ export default {
     color: $color-error;
 }
 
-.black-bg {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.432);
+.submit-button {
+    width: 50%;
+    height: auto;
+}
+
+.footer-logo {
+    width: 60vw;
+    height: 7vh;
     position: fixed;
-    padding: 20px;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
-.white-bg {
-    width: 100%;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
+.flex-container {
+    display: flex;
+    justify-content: space-between; /* 두 div를 양쪽 끝에 정렬합니다. */
 }
 
-.modal-exit-btn {
-    margin-top: 30px;
+.flex-item-disagree {
+    width: 50%; /* 각 div의 너비를 조절하여 간격을 만듭니다. */
+    /*border: 1px solid #000; !* 각 div에 테두리 추가 (옵션) *!*/
 }
 
-.modal-exit-btn:hover {
-    cursor: pointer;
+.flex-item-agree {
+    width: 50%; /* 각 div의 너비를 조절하여 간격을 만듭니다. */
+    /*border: 1px solid #000; !* 각 div에 테두리 추가 (옵션) *!*/
+}
+
+.consent-text {
+    font-size: 4vw;
+}
+
+.main-title-container {
+    height: 100%;
+    display: flex;
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: flex-start; /* 화면 상단에 정렬 */
+}
+.title-img{
+    height: 100%;
+    text-align: center; /* 이미지를 가운데 정렬 */
+}
+.img {
+    width: 90%; /* 이미지를 부모 요소 너비에 맞춤 */
+    height: 80%;
 }
 </style>
