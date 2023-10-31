@@ -1,6 +1,6 @@
 <template>
     <div class="app-main-container">
-        <LanguageBtn/>
+        <LanguageBtn v-if="shouldShowLangBtn"/>
         <RouterView/>
     </div>
 </template>
@@ -12,7 +12,18 @@ import LanguageBtn from "@/components/LanguageBtn.vue";
 
 export default {
     name: "App",
-    components: {LanguageBtn}
+    components: {LanguageBtn},
+    computed: {
+        shouldShowLangBtn() {
+            if (this.$route.path == '/kr') {
+                return this.$route.path !== '/kr';
+            } else if (this.$route.path == '/vn') {
+                return this.$route.path !== '/vn';
+            } else if (this.$route.path == '/result') {
+                return this.$route.path !== '/result'
+            } return true
+        }
+    }
 }
 </script>
 
