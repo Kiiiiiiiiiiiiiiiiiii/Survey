@@ -1,25 +1,38 @@
 <template>
     <div class="success-main-container">
         <div class="message">
-            {{ $t('successText') }}<br>
             <img class="img" alt="img" src="../assets/success.png">
+            <br>
+            <br>
+            <span class="font">{{ $t('successText') }}</span>
+            <p class="bold-text">{{ $t('thx') }}</p>
         </div>
-        <div class="logo">
-            <Logo/>
+        <div class="footer-logo">
+            <Footer/>
         </div>
     </div>
 </template>
 
 <script>
-import Logo from "@/components/Logo.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
     name: "Success",
-    components: {Logo}
+    components: {Footer}
 }
 </script>
 
 <style scoped>
+@font-face {
+    font-family: NotoSans-Medium;
+    src: url("../assets/fonts/NotoSans-Medium.ttf");
+}
+
+@font-face {
+    font-family: NotoSans-Bold;
+    src: url("../assets/fonts/NotoSans-Bold.ttf");
+}
+
 .success-main-container {
     overflow: hidden; /* 스크롤을 숨깁니다. */
     position: fixed;
@@ -31,6 +44,7 @@ export default {
     align-items: center;
     display: flex;
 }
+
 .message {
     text-align: center;
     align-items: center;
@@ -40,12 +54,26 @@ export default {
     max-width: 100%;
     white-space: pre-wrap; /*\n을 줄바꿈으로 치환*/
 }
+
 .img {
-    width: 30%;
+    width: 40%;
 }
-.logo {
-    width: 80vw;
+
+.footer-logo {
+    width: 60vw;
+    height: 7vh;
     position: fixed;
     bottom: 0;
+}
+
+.font {
+    color: red;
+    font-family: NotoSans-Medium;
+}
+
+.bold-text {
+    color: red;
+    font-weight: bold;
+    font-family: NotoSans-Bold;
 }
 </style>

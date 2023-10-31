@@ -1,19 +1,25 @@
 <template>
-    <div class="black-bg">
-<!--        <div class="white-bg ">
-            <p>모달</p>
-        </div>-->
+    <div class="image-upload-container">
         <div class="upload-button">
         <input type="file" ref="fileInput" style="display: none" @change="uploadImage">
-<!--            <input type="file" ref="fileInput" style="display: none" @change="imageUpload()">-->
-<!--        <input multiple @change="imageUpload()" ref="images" type="file">-->
         </div>
-<!--        <button class="modal-exit-btn" @click="saveImage()">-->
-        <button class="modal-exit-btn" @click="openFileInput">
-            저장보튼
-        </button>
-        <div class="upload-image">
-        <img :src="imageUrl" v-if="imageUrl" alt="Uploaded Image">
+        <div class="img-con">
+            <div class="namecard">
+                <img src="../assets/namecard.png" style="width: 40vw; height: auto">
+            </div>
+            <div class="upload-text">
+                <br>
+                {{ $t('upload') }}
+            </div>
+            <div class="upload-button">
+                <img @click="openFileInput" src="../assets/upload_btn.png" style="width: 40vw; height: auto">
+            </div>
+            <div class="skip-button">
+                <img @click="skip" src="../assets/skip_btn.png" style="width: 40vw; height: auto">
+            </div>
+        </div>
+        <div class="logo">
+            <Footer/>
         </div>
     </div>
 </template>
@@ -22,25 +28,14 @@
 /*import Logo from "@/components/Logo.vue";*/
 import {useRouter} from 'vue-router';
 import axios from 'axios';
+import Footer from "@/components/Footer.vue";
+/*import router from "@/scripts/router";*/
 /*import {reactive, onBeforeMount} from "vue";*/
 
 export default {
-    components: {},
+    components: {Footer},
     setup() {
-        console.log('setup props: ', )
         const router = useRouter();
-        console.log('setup', history.state);
-        console.log('setup', history.state.name);
-        /*const formData = JSON.parse(router)
-        console.log('setup formData : ', formData)*/
-        /*const form = reactive({
-
-        })
-        console.log('child params: ', router.param)
-          onBeforeMount(() => {
-          const formData = route.params.data;
-          });
-        return {router};*/
         return {router}
     },
     data() {
@@ -63,11 +58,9 @@ export default {
           if(file) {
               reader.readAsDataURL(file);
           }
-          console.log('uploadimage : ', file )
           this.saveImage(file)
         },
         imageUpload() {
-            console.log('image start')
         },
         saveImage(event) {
             const file = event;
@@ -85,6 +78,9 @@ export default {
                    console.log('upload fail')
                 }
             })
+        },
+        skip() {
+            this.router.push({name: 'success'});
         }
     },
     mounted() {
@@ -95,25 +91,53 @@ export default {
 </script>
 
 <style scoped>
-.black-bg {
+@font-face {
+    font-family: NotoSans-Medium;
+    src: url("../assets/fonts/NotoSans-Medium.ttf");
+}
+.image-upload-container {
     display: flex;
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.432);
     position: fixed;
     padding: 20px;
-    background-color: green;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
-
-.white-bg {
-    width: 100%;
-    align-content: center;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
+.img-con{
+    display: grid;
+    width: 100vw; /* 원하는 백분율로 이미지 크기를 조절 */
+    height: auto; /* 가로 너비를 기반으로 세로 비율을 유지 */
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.upload-text{
+    white-space: pre-wrap; /*\n을 줄바꿈으로 치환*/
+    color: red;
+    font-family: NotoSans-Medium;
+    font-size: 5vw;
+}
+.namecard {
+    width: 10vw; /* 원하는 백분율로 이미지 크기를 조절 */
+    height: auto; /* 가로 너비를 기반으로 세로 비율을 유지 */
 }
 .upload-button {
-    background-color: coral;
+    width: 10vw; /* 원하는 백분율로 이미지 크기를 조절 */
+    height: auto; /* 가로 너비를 기반으로 세로 비율을 유지 */
+    margin: 3vh 0; /* 이미지 컬럼 사이의 세로 간격을 조절 */
+}
+.skip-button {
+    width: 30%; /* 원하는 백분율로 이미지 크기를 조절 */
+    height: auto; /* 가로 너비를 기반으로 세로 비율을 유지 */
+}
+.logo {
+    width: 60vw;
+    height: 7vh;
+    position: fixed;
+    bottom: 0;
+
 }
 </style>
