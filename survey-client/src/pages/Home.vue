@@ -7,28 +7,34 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
     </div>
     <div class="home-main-container">
         <div>
             <div class="grid-container">
-                {{ $t('name') }} : <input class="input-element" v-model="state.form.name"/>
-                {{ $t('company') }} : <input class="input-element" v-model="state.form.company"/>
-                {{ $t('email') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
-                                           v-model="state.form.email"/>
-                <!--            <p v-show="valid.email" class="input-error"> 이메일 오류 </p>-->
-                {{ $t('phone') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
-                                           v-model="state.form.phone"/>
-                {{ $t('industry') }} :
-                <select class="input-element" v-model="state.form.industry">
-                    <option>{{ $t('confectionary') }}</option>
-                    <option>{{ $t('dessert') }}</option>
-                    <option>{{ $t('hmr') }}</option>
-                    <option>{{ $t('alternativeFood') }}</option>
-                    <option>{{ $t('etc') }}</option>
-                </select>
+                <div class="inner-grid">
+                    <p style="color: red">⦁</p> {{ $t('name') }} : <input required class="input-element" v-model="state.form.name"/>
+                </div>
+                <div class="inner-grid">
+                    <p style="color: red">⦁</p> {{ $t('company') }} : <input class="input-element" v-model="state.form.company"/>
+                </div>
+                <div class="inner-grid">
+                    <p style="color: red">⦁</p> {{ $t('email') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
+                                                 v-model="state.form.email"/>
+                </div>
+                <div class="inner-grid">
+                    <p style="color: red">⦁</p> {{ $t('phone') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
+                                                 v-model="state.form.phone"/>
+                </div>
+                <div class="inner-grid">
+                    <p style="color: red">⦁</p> {{ $t('industry') }} :
+                    <select class="input-element" v-model="state.form.industry">
+                        <option>{{ $t('confectionary') }}</option>
+                        <option>{{ $t('dessert') }}</option>
+                        <option>{{ $t('hmr') }}</option>
+                        <option>{{ $t('alternativeFood') }}</option>
+                        <option>{{ $t('etc') }}</option>
+                    </select>
+                </div>
             </div>
 
             <div class="container-element-agree">
@@ -156,14 +162,21 @@ export default {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2x2 그리드 생성 */
-    gap: 10px; /* 그리드 아이템 간의 간격 설정 */
-    text-align: center;
+   /* grid-template-columns: 2fr 2fr; !* 2x2 그리드 생성 *!*/
+    grid-template-rows: 1fr 1fr; /* 2개의 행을 생성 */
+    gap: 20px; /* 그리드 아이템 간의 간격 설정 */
+    padding-left: 4vw;
+    text-align: left;
     font-family: NotoSans-Bold
+}
+.inner-grid{
+    display: grid;
+    grid-template-columns: 1fr 6fr 10fr;
+    /*grid-template-rows: 2fr 2fr 2fr;*/
 }
 
 .input-element {
-    width: 40vw;
+    width: 50vw;
 }
 
 .container-element-agree {
