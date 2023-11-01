@@ -11,7 +11,7 @@ export default {
     name: "FrontImageKR",
     methods: {
         moveMain() {
-            this.$router.push('main?branchId=2');
+            this.$router.push('main?branchId=1');
         }
     },
     mounted() {
