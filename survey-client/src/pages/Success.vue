@@ -4,8 +4,8 @@
             <img class="img" alt="img" src="../assets/success.png">
             <br>
             <br>
-            <span class="font">{{ $t('successText') }}</span>
-            <p class="bold-text">{{ $t('thx') }}</p>
+            <span class="font" :style="fontStyle">{{ $t('successText') }}</span>
+            <p class="bold-text" :style="fontStyleBold">{{ $t('thx') }}</p>
         </div>
         <div class="footer-logo">
             <Footer/>
@@ -18,7 +18,31 @@ import Footer from "@/components/Footer.vue";
 
 export default {
     name: "Success",
-    components: {Footer}
+    components: {Footer},
+    computed: {
+        fontStyleBold() {
+            if (this.$i18n.locale === 'ko') {
+                return {
+                    fontFamily: 'NotoSansKR-Bold'
+                }
+            } else {
+                return {
+                    fontFamily: 'NotoSans-Bold'
+                }
+            }
+        },
+        fontStyle() {
+            if (this.$i18n.locale === 'ko') {
+                return {
+                    fontFamily: 'NotoSansKR-Medium'
+                }
+            } else {
+                return {
+                    fontFamily: 'NotoSans-Medium'
+                }
+            }
+        }
+    }
 }
 </script>
 
@@ -56,7 +80,7 @@ export default {
 }
 
 .img {
-    width: 40%;
+    width: 55%;
 }
 
 .footer-logo {
@@ -68,12 +92,10 @@ export default {
 
 .font {
     color: red;
-    font-family: NotoSans-Medium;
 }
 
 .bold-text {
     color: red;
     font-weight: bold;
-    font-family: NotoSans-Bold;
 }
 </style>

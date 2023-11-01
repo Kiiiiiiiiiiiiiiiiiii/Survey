@@ -100,13 +100,14 @@ export default {
 
         const submit = () => {
             axios.post("/api/submit", state.form).then((res) => {
+                console.log ('submit params test : ', state.form.branchId)
                 if (res.data) {
                     /*const Params = { state: JSON.stringify(state.form)}
                     console.log('params : ', Params)*/
                     /*router.push({name: 'success'});*/
-                    router.push({name: 'imageUpload', state: state.form});
+                    router.push({name: 'imageUpload', query: {branchId: state.form.branchId}, state: state.form});
                 } else {
-                    router.push({name: 'duplicate'});
+                    router.push({name: 'duplicate', query: {branchId: state.form.branchId}});
                 }
             })
         }
@@ -121,7 +122,8 @@ export default {
             emailHasError: false,
             valid: {
                 email: false
-            }
+            },
+            nowlocale: 'en'
         }
     },
     methods: {
@@ -162,15 +164,15 @@ export default {
                     fontFamily: 'NotoSans-Medium'
                 }
             }
-        }
-    },
+        },
+    }/*,
     watch: {
         'state.form.email': function () {
             console.log('watch start')
             this.checkemail()
             console.log('watch end')
         }
-    }
+    }*/
 }
 </script>
 

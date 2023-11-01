@@ -1,21 +1,19 @@
 <template>
     <div class="image-upload-container">
-        <div class="upload-button">
         <input type="file" ref="fileInput" style="display: none" @change="uploadImage">
-        </div>
         <div class="img-con">
             <div class="namecard">
-                <img src="../assets/namecard.png" style="width: 40vw; height: auto">
+                <img src="../assets/namecard.png" style="width: 50vw; height: auto">
             </div>
-            <div class="upload-text">
-                <br>
-                {{ $t('upload') }}
+            <div class="upload-text" :style="fontStyle">
+                <span>{{ $t('upload') }}</span>
             </div>
+            <br>
             <div class="upload-button">
-                <img @click="openFileInput" src="../assets/upload_btn.png" style="width: 40vw; height: auto">
+                <img @click="openFileInput" src="../assets/upload_btn.png" style="width: 50vw; height: auto">
             </div>
             <div class="skip-button">
-                <img @click="skip" src="../assets/skip_btn.png" style="width: 40vw; height: auto">
+                <img @click="skip" src="../assets/skip_btn.png" style="width: 50vw; height: auto">
             </div>
         </div>
         <div class="logo">
@@ -30,6 +28,8 @@ import {useRouter} from 'vue-router';
 import axios from 'axios';
 import Footer from "@/components/Footer.vue";
 /*import router from "@/scripts/router";*/
+/*import {reactive} from "vue";*/
+/*import router from "@/scripts/router";*/
 /*import {reactive, onBeforeMount} from "vue";*/
 
 export default {
@@ -40,7 +40,9 @@ export default {
     },
     data() {
       return {
-          imageUrl: null
+          imageUrl: null,
+          nowlocale: 'en',
+          branchId: this.$route.query.branchId
       }
     },
     methods: {
@@ -60,8 +62,6 @@ export default {
           }
           this.saveImage(file)
         },
-        imageUpload() {
-        },
         saveImage(event) {
             const file = event;
             const formData = new FormData();
@@ -72,7 +72,7 @@ export default {
 
             axios.post("/api/imageUpload", formData).then((res) => {
                 if (res.data) {
-                    this.router.push({name: 'success'});
+                    this.router.push({name: 'success', query: {branchId: history.state.branchId}});
                     console.log('upload success')
                 } else {
                    console.log('upload fail')
@@ -80,12 +80,37 @@ export default {
             })
         },
         skip() {
-            this.router.push({name: 'success'});
+            this.router.push({name: 'success', query: {branchId: this.branchId}});
+        }
+    },
+    computed: {
+        fontStyleBold() {
+            if (this.$i18n.locale === 'ko') {
+                return {
+                    fontFamily: 'NotoSansKR-Bold'
+                }
+            } else {
+                return {
+                    fontFamily: 'NotoSans-Bold'
+                }
+            }
+        },
+        fontStyle() {
+            if (this.$i18n.locale === 'ko') {
+                return {
+                    fontFamily: 'NotoSansKR-Medium'
+                }
+            } else {
+                return {
+                    fontFamily: 'NotoSans-Medium'
+                }
+            }
         }
     },
     mounted() {
-        /*이곳은 화면에 처음 진입했을떄 바로 실행되는 부분*/
-        /*console.log('imagepage: ')*/
+        /*되긴함 console.log('imageUpload: ', this.$router.currentRoute.value.query.branchId)*/
+        /*console.log('imageUpload3: ', this.$router.currentRoute.query.branchId)*/
+        /*this.$route.params.branchId*/
     }
 }
 </script>
@@ -95,13 +120,19 @@ export default {
     font-family: NotoSans-Medium;
     src: url("../assets/fonts/NotoSans-Medium.ttf");
 }
+@font-face {
+    font-family: NotoSans-Bold;
+    src: url("../assets/fonts/NotoSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: NotoSansKR-Bold;
+    src: url("../assets/fonts/NotoSansKR-Bold.ttf");
+}
 .image-upload-container {
-    display: flex;
-    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 90%;
     position: fixed;
-    padding: 20px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -119,10 +150,11 @@ export default {
     color: red;
     font-family: NotoSans-Medium;
     font-size: 5vw;
+    align-items: center;
 }
 .namecard {
-    width: 10vw; /* 원하는 백분율로 이미지 크기를 조절 */
-    height: auto; /* 가로 너비를 기반으로 세로 비율을 유지 */
+    width: 60%; /* 원하는 백분율로 이미지 크기를 조절 */
+   /* height: auto; !* 가로 너비를 기반으로 세로 비율을 유지 *!*/
 }
 .upload-button {
     width: 10vw; /* 원하는 백분율로 이미지 크기를 조절 */

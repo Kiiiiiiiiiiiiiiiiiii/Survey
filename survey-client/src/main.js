@@ -9,6 +9,7 @@ import Result from "@/pages/Result.vue";
 import imageUpload from "@/pages/ImageUpload.vue";
 import FrontImageKR from "@/pages/FrontImageKR.vue";
 import FrontImageVN from "@/pages/FrontImageVN.vue";
+import Login from "@/pages/Login.vue";
 
 
 const routes = [
@@ -36,6 +37,9 @@ const routes = [
         path: '/duplicate', name: 'duplicate', component: Duplicate
     },
     {
+        path: '/login', name: 'Login', component: Login
+    },
+    {
         path: '/result', name: 'result', component: Result
     },
     {
@@ -44,8 +48,19 @@ const routes = [
 ]
 
 const router = createRouter(({
-    history: createWebHistory(),
+    history: createWebHistory(process.env.BACE_URL),
     routes
 }))
+
+/*router.beforeEach((to, from, next) => {
+    console.log('start before')
+    const hideLanguageBtn = to.matched.some(record => record.meta.hideLanguageBtn);
+    console.log('start hideLanguageBtn : ', hideLanguageBtn)
+    if (hideLanguageBtn) {
+        next(false);
+    } else {
+        next();
+    }
+})*/
 
 createApp(App).use(router).use(i18n).mount('#app')

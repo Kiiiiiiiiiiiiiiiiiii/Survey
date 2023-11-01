@@ -2,23 +2,47 @@
     <div class="dupli-main-container">
         <div class="message">
             <img class="img" alt="img" src="../assets/fail.png">
+            <p class="font" :style="fontStyle"> {{ $t('duplicateText') }}</p>
             <br>
             <br>
-            <p class="font"> {{ $t('duplicateText') }}</p>
         </div>
         <div class="footer-logo">
             <Footer/>
         </div>
     </div>
-
 </template>
 
 <script>
 import Footer from "@/components/Footer.vue";
 
+
 export default {
     name: "Duplicate",
-    components: {Footer}
+    components: {Footer},
+    computed: {
+        fontStyleBold() {
+            if (this.$i18n.locale === 'ko') {
+                return {
+                    fontFamily: 'NotoSansKR-Bold'
+                }
+            } else {
+                return {
+                    fontFamily: 'NotoSans-Bold'
+                }
+            }
+        },
+        fontStyle() {
+            if (this.$i18n.locale === 'ko') {
+                return {
+                    fontFamily: 'NotoSansKR-Medium'
+                }
+            } else {
+                return {
+                    fontFamily: 'NotoSans-Medium'
+                }
+            }
+        }
+    }
 }
 </script>
 
@@ -51,7 +75,7 @@ export default {
 }
 
 .img {
-    width: 40vw;
+    width: 60%;
 }
 
 .footer-logo {
@@ -63,6 +87,5 @@ export default {
 
 .font {
     color: red;
-    font-family: NotoSans-Medium;
 }
 </style>
