@@ -10,24 +10,33 @@
     </div>
     <div class="home-main-container">
         <div>
-            <div class="grid-container">
+            <div class="grid-container" :style="fontStyleBold">
                 <div class="inner-grid">
-                    <p style="color: red">⦁</p> {{ $t('name') }} : <input required class="input-element" v-model="state.form.name"/>
+                    <span class="ptag" style="color: red">⦁</span> {{ $t('name') }} : <input required
+                                                                                             class="input-element"
+                                                                                             v-model="state.form.name"
+                                                                                             :style="fontStyle"/>
                 </div>
                 <div class="inner-grid">
-                    <p style="color: red">⦁</p> {{ $t('company') }} : <input class="input-element" v-model="state.form.company"/>
+                    <span class="ptag" style="color: red">⦁</span> {{ $t('company') }} : <input class="input-element"
+                                                                                                v-model="state.form.company"
+                                                                                                :style="fontStyle"/>
                 </div>
                 <div class="inner-grid">
-                    <p style="color: red">⦁</p> {{ $t('email') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
-                                                 v-model="state.form.email"/>
+                    <span class="ptag" style="color: red">⦁</span> {{ $t('email') }} : <input class="input-element"
+                                                                                              :class="{'input-danger': emailHasError }"
+                                                                                              v-model="state.form.email"
+                                                                                              :style="fontStyle"/>
                 </div>
                 <div class="inner-grid">
-                    <p style="color: red">⦁</p> {{ $t('phone') }} : <input class="input-element" :class="{'input-danger': emailHasError }"
-                                                 v-model="state.form.phone"/>
+                    <span class="ptag" style="color: red">⦁</span> {{ $t('phone') }} : <input class="input-element"
+                                                                                              :class="{'input-danger': emailHasError }"
+                                                                                              v-model="state.form.phone"
+                                                                                              :style="fontStyle"/>
                 </div>
                 <div class="inner-grid">
-                    <p style="color: red">⦁</p> {{ $t('industry') }} :
-                    <select class="input-element" v-model="state.form.industry">
+                    <span class="ptag" style="color: red">⦁</span> {{ $t('industry') }} :
+                    <select class="input-element" v-model="state.form.industry" :style="fontStyle">
                         <option>{{ $t('confectionary') }}</option>
                         <option>{{ $t('dessert') }}</option>
                         <option>{{ $t('hmr') }}</option>
@@ -37,7 +46,7 @@
                 </div>
             </div>
 
-            <div class="container-element-agree">
+            <div class="container-element-agree" :style="fontStyleBold">
                 <p></p>
                 <span class="consent-text">{{ $t('consent') }}</span>
                 <br>
@@ -131,6 +140,30 @@ export default {
             this.emailHasError = false
         }
     },
+    computed: {
+        fontStyleBold() {
+            if (this.$i18n.locale === 'ko') {
+                return {
+                    fontFamily: 'NotoSansKR-Bold'
+                }
+            } else {
+                return {
+                    fontFamily: 'NotoSans-Bold'
+                }
+            }
+        },
+        fontStyle() {
+            if (this.$i18n.locale === 'ko') {
+                return {
+                    fontFamily: 'NotoSansKR-Medium'
+                }
+            } else {
+                return {
+                    fontFamily: 'NotoSans-Medium'
+                }
+            }
+        }
+    },
     watch: {
         'state.form.email': function () {
             console.log('watch start')
@@ -145,6 +178,11 @@ export default {
 @font-face {
     font-family: NotoSans-Bold;
     src: url("../assets/fonts/NotoSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: NotoSansKR-Bold;
+    src: url("../assets/fonts/NotoSansKR-Bold.ttf");
 }
 
 .home-main-container {
@@ -162,21 +200,31 @@ export default {
 
 .grid-container {
     display: grid;
-   /* grid-template-columns: 2fr 2fr; !* 2x2 그리드 생성 *!*/
+    /* grid-template-columns: 2fr 2fr; !* 2x2 그리드 생성 *!*/
     grid-template-rows: 1fr 1fr; /* 2개의 행을 생성 */
     gap: 20px; /* 그리드 아이템 간의 간격 설정 */
-    padding-left: 4vw;
+    padding-left: 10vw;
     text-align: left;
-    font-family: NotoSans-Bold
+    place-items: self-start; /* 수직 및 수평 가운데 정렬 */
 }
-.inner-grid{
+
+.inner-grid {
     display: grid;
     grid-template-columns: 1fr 6fr 10fr;
+    text-align: left;
+    align-items: center; /* 텍스트를 수직으로 가운데 정렬 */
+    /*place-items: center; !* 수직 및 수평 가운데 정렬 *!*/
     /*grid-template-rows: 2fr 2fr 2fr;*/
 }
 
+.ptag {
+    place-items: center;
+    align-items: center; /* 텍스트를 수직으로 가운데 정렬 */
+}
+
 .input-element {
-    width: 50vw;
+    width: 45vw;
+    border: 1px solid #ccc; /* 테두리 스타일 및 두께 설정 */
 }
 
 .container-element-agree {
@@ -244,10 +292,12 @@ export default {
     justify-content: center; /* 가로 가운데 정렬 */
     align-items: flex-start; /* 화면 상단에 정렬 */
 }
-.title-img{
+
+.title-img {
     height: 100%;
     text-align: center; /* 이미지를 가운데 정렬 */
 }
+
 .img {
     width: 90%; /* 이미지를 부모 요소 너비에 맞춤 */
     height: 80%;
