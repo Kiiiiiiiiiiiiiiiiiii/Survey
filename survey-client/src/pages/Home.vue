@@ -1,9 +1,11 @@
 <template>
+    <br>
     <div class="main-title-container">
         <div class="title-img">
             <img class="img" src="../assets/main-title-kr.png" v-if="state.form.branchId == 1">
             <img class="img" src="../assets/main-title-vn.png" v-if="state.form.branchId == 2">
         </div>
+        <br>
         <br>
         <br>
         <br>
@@ -46,8 +48,9 @@
                 </div>
             </div>
 
-            <div class="container-element-agree" :style="fontStyleBold">
+            <div class="container-element-agree" :style="fontStyle">
                 <p></p>
+                <br>
                 <span class="consent-text">{{ $t('consent') }}</span>
                 <br>
                 <br>
@@ -84,7 +87,7 @@ import {useRouter} from "vue-router";
 import Footer from "@/components/Footer.vue";
 
 export default {
-    components: {Footer/*, Logo*/},
+    components: {Footer},
     setup() {
         const router = useRouter()
         const state = reactive({
@@ -205,14 +208,14 @@ export default {
     /* grid-template-columns: 2fr 2fr; !* 2x2 그리드 생성 *!*/
     grid-template-rows: 1fr 1fr; /* 2개의 행을 생성 */
     gap: 20px; /* 그리드 아이템 간의 간격 설정 */
-    padding-left: 10vw;
-    text-align: left;
+    padding-left: 14vw;
+    text-align: left;;
     place-items: self-start; /* 수직 및 수평 가운데 정렬 */
 }
 
 .inner-grid {
     display: grid;
-    grid-template-columns: 1fr 6fr 10fr;
+    grid-template-columns: 1fr 6fr 12fr;
     text-align: left;
     align-items: center; /* 텍스트를 수직으로 가운데 정렬 */
     /*place-items: center; !* 수직 및 수평 가운데 정렬 *!*/
@@ -235,7 +238,8 @@ export default {
     text-align: center;
     font-size: 2vh;
     white-space: pre-wrap; /*\n을 줄바꿈으로 치환*/
-    font-family: NotoSans-Bold;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .submit-buttons {
@@ -255,12 +259,12 @@ export default {
 }
 
 .submit-button {
-    width: 50%;
+    width: 40%;
     height: auto;
 }
 
 .footer-logo {
-    width: 60vw;
+    width: 40vw;
     height: 7vh;
     position: fixed;
     bottom: 0;
@@ -285,7 +289,8 @@ export default {
 }
 
 .consent-text {
-    font-size: 4vw;
+    font-size: 3vw;
+    width: 50vw;
 }
 
 .main-title-container {
@@ -301,7 +306,7 @@ export default {
 }
 
 .img {
-    width: 90%; /* 이미지를 부모 요소 너비에 맞춤 */
+    width: 70%; /* 이미지를 부모 요소 너비에 맞춤 */
     height: 80%;
 }
 </style>
