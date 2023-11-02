@@ -79,7 +79,7 @@ export default {
 }
 
 .footer-logo {
-    width: 60vw;
+    width: 40vw;
     height: 7vh;
     position: fixed;
     bottom: 0;
