@@ -2,7 +2,8 @@
     <div class="dupli-main-container">
         <div class="message">
             <img class="img" alt="img" src="../assets/fail.png">
-            <p class="font" :style="fontStyle"> {{ $t('duplicateText') }}</p>
+            <p class="bold-text" :style="fontStyleBold">{{ $t('sry') }}</p>
+            <p class="conetent-text" :style="fontStyle"> {{ $t('duplicateText') }}</p>
             <br>
             <br>
         </div>
@@ -56,12 +57,12 @@ export default {
     overflow: hidden; /* 스크롤을 숨깁니다. */
     position: fixed;
     width: 100%;
-    height: 100%; /*% 말고 vh로 해야 화면이 꽉찬다.*/
+    height: auto; /*% 말고 vh로 해야 화면이 꽉찬다.*/
     max-height: 100%;
-    /*    아래 3개 추가로 이미지 하단중앙에 고정*/
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
+    margin-top: 15%;
 }
 
 .message {
@@ -85,7 +86,12 @@ export default {
     bottom: 0;
 }
 
-.font {
+.conetent-text {
     color: red;
+    font-size: 4vw;
+}
+.bold-text {
+    color: red;
+    font-weight: bold;
 }
 </style>

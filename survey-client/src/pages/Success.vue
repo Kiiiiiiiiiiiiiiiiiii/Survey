@@ -1,10 +1,13 @@
 <template>
     <div class="success-main-container">
         <div class="message">
+            <div>
             <img class="img" alt="img" src="../assets/success.png">
+            </div>
+            <div>
+            <span class="conetent-text" :style="fontStyle">{{ $t('successText') }}</span>
+            </div>
             <br>
-            <br>
-            <span class="font" :style="fontStyle">{{ $t('successText') }}</span>
             <p class="bold-text" :style="fontStyleBold">{{ $t('thx') }}</p>
         </div>
         <div class="footer-logo">
@@ -61,12 +64,13 @@ export default {
     overflow: hidden; /* 스크롤을 숨깁니다. */
     position: fixed;
     width: 100%;
-    height: 100%; /*% 말고 vh로 해야 화면이 꽉찬다. */
+    height: auto; /*% 말고 vh로 해야 화면이 꽉찬다. */
     max-height: 100%;
     /*    아래 3개 추가로 이미지 하단중앙에 고정*/
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
+    margin-top: 15%;
 }
 
 .message {
@@ -90,8 +94,9 @@ export default {
     bottom: 0;
 }
 
-.font {
+.conetent-text {
     color: red;
+    font-size: 4vw;
 }
 
 .bold-text {
