@@ -33,7 +33,7 @@ export default {
 <style scoped>
 .locale{
     text-align: right;
-    font-size: 4vw; /*화면 폭의 5%크기로 버튼 텍스트 조절*/
+    font-size: 3vw; /*화면 폭의 5%크기로 버튼 텍스트 조절*/
     padding: 2% 5%; /*//화면 폭 2%높이 및 5%너비로 버튼 조절*/
 }
 .langStyle{
