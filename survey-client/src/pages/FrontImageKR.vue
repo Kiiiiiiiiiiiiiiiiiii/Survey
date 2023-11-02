@@ -32,7 +32,14 @@ export default {
     background-color: #fff; /* 원하는 배경색으로 설정 */
 }
 .res_img{
-    max-width: 100vw;
-    max-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff; /* 로딩 이미지가 표시되는 동안 화면을 덮을 색상 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
