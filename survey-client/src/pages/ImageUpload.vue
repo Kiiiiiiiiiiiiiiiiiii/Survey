@@ -3,17 +3,17 @@
         <input type="file" ref="fileInput" style="display: none" @change="uploadImage">
         <div class="img-con">
             <div class="namecard">
-                <img class="namecard-img" src="../assets/namecard.png">
+                <img class="namecard-img" src="../../public/img/namecard.png">
             </div>
             <div class="upload-text" :style="fontStyle">
                 <span class="conetent-text">{{ $t('upload') }}</span>
             </div>
             <br>
             <div class="upload-button">
-                <img class="upload-button-img" @click="openFileInput" src="../assets/upload_btn.png">
+                <img class="upload-button-img" @click="openFileInput" src="../../public/img/upload_btn.png">
             </div>
             <div class="skip-button">
-                <img class="skip-button-img" @click="skip" src="../assets/skip_btn.png">
+                <img class="skip-button-img" @click="skip" src="../../public/img/skip_btn.png">
             </div>
         </div>
         <div class="logo">
@@ -113,16 +113,16 @@ export default {
 <style scoped>
 @font-face {
     font-family: NotoSans-Medium;
-    src: url("../assets/fonts/NotoSans-Medium.ttf");
+    src: url("../../public/fonts/NotoSans-Medium.ttf");
 }
 @font-face {
     font-family: NotoSans-Bold;
-    src: url("../assets/fonts/NotoSans-Bold.ttf");
+    src: url("../../public/fonts/NotoSans-Bold.ttf");
 }
 
 @font-face {
     font-family: NotoSansKR-Bold;
-    src: url("../assets/fonts/NotoSansKR-Bold.ttf");
+    src: url("../../public/fonts/NotoSansKR-Bold.ttf");
 }
 .image-upload-container {
     width: 100%;

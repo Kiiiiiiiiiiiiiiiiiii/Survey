@@ -2,8 +2,8 @@
     <br>
     <div class="main-title-container">
         <div class="title-img">
-            <img class="img" src="../assets/main-title-kr.png" v-if="state.form.branchId == 1">
-            <img class="img" src="../assets/main-title-vn.png" v-if="state.form.branchId == 2">
+            <img class="img" src="../../public/img/main-title-kr.png" v-if="state.form.branchId == 1">
+            <img class="img" src="../../public/img/main-title-vn.png" v-if="state.form.branchId == 2">
         </div>
         <br>
         <br>
@@ -69,8 +69,8 @@
             <br>
             <br>
             <div class="submit-buttons">
-                <img src="../assets/disable_submit_btn.png" v-if="!selected" class="submit-button">
-                <img src="../assets/submit_btn.png" v-if="selected" class="submit-button" @click="submit">
+                <img src="../../public/img/disable_submit_btn.png" v-if="!selected" class="submit-button">
+                <img src="../../public/img/submit_btn.png" v-if="selected" class="submit-button" @click="submit">
             </div>
         </div>
         <div class="footer-logo">
@@ -182,12 +182,12 @@ export default {
 <style scoped>
 @font-face {
     font-family: NotoSans-Bold;
-    src: url("../assets/fonts/NotoSans-Bold.ttf");
+    src: url("../../public/fonts/NotoSans-Bold.ttf");
 }
 
 @font-face {
     font-family: NotoSansKR-Bold;
-    src: url("../assets/fonts/NotoSansKR-Bold.ttf");
+    src: url("../../public/fonts/NotoSansKR-Bold.ttf");
 }
 
 .home-main-container {

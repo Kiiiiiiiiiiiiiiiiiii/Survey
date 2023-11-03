@@ -1,6 +1,6 @@
 <template>
     <div class="logo-container" @click="moveMain">
-        <img class="res_img" src="../assets/loading_img_vn.png" alt="Splash Image">
+        <img class="res_img" src="../../public/img/loading_img_vn.png" alt="Splash Image">
     </div>
 </template>
 

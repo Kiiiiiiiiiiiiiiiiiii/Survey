@@ -1,7 +1,7 @@
 <template>
     <div class="dupli-main-container">
         <div class="message">
-            <img class="img" alt="img" src="../assets/fail.png">
+            <img class="img" alt="img" src="../../public/img/fail.png">
             <p class="bold-text" :style="fontStyleBold">{{ $t('sry') }}</p>
             <p class="conetent-text" :style="fontStyle"> {{ $t('duplicateText') }}</p>
             <br>
@@ -50,7 +50,7 @@ export default {
 <style scoped>
 @font-face {
     font-family: NotoSans-Medium;
-    src: url("../assets/fonts/NotoSans-Medium.ttf");
+    src: url("../../public/fonts/NotoSans-Medium.ttf");
 }
 
 .dupli-main-container {

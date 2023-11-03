@@ -2,7 +2,7 @@
     <div class="success-main-container">
         <div class="message">
             <div>
-            <img class="img" alt="img" src="../assets/success.png">
+            <img class="img" alt="img" src="../../public/img/success.png">
             </div>
             <div>
             <span class="conetent-text" :style="fontStyle">{{ $t('successText') }}</span>
@@ -52,12 +52,12 @@ export default {
 <style scoped>
 @font-face {
     font-family: NotoSans-Medium;
-    src: url("../assets/fonts/NotoSans-Medium.ttf");
+    src: url("../../public/fonts/NotoSans-Medium.ttf");
 }
 
 @font-face {
     font-family: NotoSans-Bold;
-    src: url("../assets/fonts/NotoSans-Bold.ttf");
+    src: url("../../public/fonts/NotoSans-Bold.ttf");
 }
 
 .success-main-container {
