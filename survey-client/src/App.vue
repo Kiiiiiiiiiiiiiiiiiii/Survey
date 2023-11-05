@@ -21,7 +21,10 @@ export default {
                 return this.$route.path !== '/vn';
             } else if (this.$route.path == '/result') {
                 return this.$route.path !== '/result'
-            } return true
+            } else if (this.$route.path == '/login') {
+                return this.$route.path !== '/login'
+            }
+            return true
         }
     }
 }
