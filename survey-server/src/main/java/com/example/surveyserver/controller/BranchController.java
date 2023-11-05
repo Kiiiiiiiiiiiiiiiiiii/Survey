@@ -31,7 +31,7 @@ public class BranchController {
     public List<Object> getBranches() {
 
         List<Branch> branches = branchRepository.findAll();
-        List<Object> test = new ArrayList();
+        List<Object> Data = new ArrayList();
         Date now = new Date();
 
         for (int i = 0; i < branches.size(); i++) {
@@ -43,10 +43,10 @@ public class BranchController {
             dataList.put("code", branches.get(i).getCode());
             dataList.put("todayCnt", todayCnt);
             dataList.put("totalCnt", totalCnt);
-            test.add(i, dataList);
+            Data.add(i, dataList);
         }
 
-        return test;
+        return Data;
     }
 }
 
