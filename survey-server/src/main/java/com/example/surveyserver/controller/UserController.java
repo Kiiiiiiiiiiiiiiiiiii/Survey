@@ -194,5 +194,13 @@ public class UserController {
             return "업로드할 이미지를 선택하세요.";
         }
     }
+    @PostMapping("/api/login")
+    public boolean login(@RequestBody Map<String, String> params) {
+        User checkUser = userRepository.findByNameAndEmail(params.get("name"), params.get("email"));
+        if (checkUser.getIsAdmin() == 1) {
+            return true;
+        }
+        return false;
+    }
 }
 
