@@ -27,7 +27,6 @@
                 </div>
                 <div class="inner-grid">
                     <span class="ptag" style="color: red">⦁</span> {{ $t('email') }} : <input class="input-element"
-                                                                                              :class="{'input-danger': emailHasError }"
                                                                                               v-model="state.form.email"
                                                                                               :style="fontStyle"/>
                 </div>
@@ -99,13 +98,11 @@ export default {
                 phone: "",
                 industry: "",
                 branchId: router.currentRoute.value.query.branchId
-            },
-            showErrorMessage: false
+            }
         })
 
         const submit = () => {
             const missingFields = []
-
             if (state.form.name === "") {
                 missingFields.push("Name")
             }
@@ -123,17 +120,26 @@ export default {
             }
             if (missingFields.length > 0) {
                 window.alert("Please fill in the following fields: " + missingFields.join(", "))
-            } else {
-            axios.post("/api/submit", state.form).then((res) => {
-                if (res.data) {
-                    router.push({name: 'imageUpload', query: {branchId: state.form.branchId}, state: state.form});
-                } else {
-                    router.push({name: 'duplicate', query: {branchId: state.form.branchId}});
-                }
-            })
+            } else if (checkemail()) {
+                axios.post("/api/submit", state.form).then((res) => {
+                    if (res.data) {
+                        router.push({name: 'imageUpload', query: {branchId: state.form.branchId}, state: state.form});
+                    } else {
+                        router.push({name: 'duplicate', query: {branchId: state.form.branchId}});
+                    }
+                })
             }
 
         }
+        function checkemail() {
+            const validateEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!validateEmail.test(state.form.email) || !state.form.email) {
+                window.alert("Please enter a valid email address.");
+                return false;
+            }
+            return true;
+        }
+
         return {state, submit}
     },
     data() {
@@ -141,23 +147,7 @@ export default {
             selected: false, //radio 버튼의 디폴트 값 설정
             true: true,
             false: false,
-            emailHasError: false,
-            valid: {
-                email: false
-            },
             nowlocale: 'en'
-        }
-    },
-    methods: {
-        checkemail() {
-            const validateEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-            if (!validateEmail.test(this.state.form.email) || !this.state.form.email) {
-                this.valid.email = true
-                this.emailHasError = true
-                return
-            }
-            this.valid.email = false
-            this.emailHasError = false
         }
     },
     computed: {
@@ -183,11 +173,6 @@ export default {
                 }
             }
         },
-    },
-    watch: {
-        'state.form.email': function () {
-            this.checkemail()
-        }
     }
 }
 </script>
