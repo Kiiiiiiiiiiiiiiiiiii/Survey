@@ -106,9 +106,7 @@ export default {
         this.refreshInterval = setInterval(this.refreshData, 30000);
         //페이지 로딩 시 호출될 api
         axios.get('/api/branches').then(res => {
-            console.log('branches : ', res.data)
             this.branches = res.data;
-            console.log(' this.branches : ', this.branches)
         })
             .catch(error => {
                 console.log(error);
@@ -118,6 +116,13 @@ export default {
         // 컴포넌트가 파괴될 때 setInterval을 해제
         clearInterval(this.refreshInterval);
     },
+    beforeRouteEnter(to, from, next) {
+        if (from.path !== '/login') {
+            next('/login')
+        } else {
+            next()
+        }
+    }
 }
 </script>
 
