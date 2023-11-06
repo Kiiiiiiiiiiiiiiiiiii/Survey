@@ -14,10 +14,11 @@
         <div>
             <div class="grid-container" :style="fontStyleBold">
                 <div class="inner-grid">
-                    <span class="ptag" style="color: red">⦁</span> {{ $t('name') }} : <input required
-                                                                                             class="input-element"
-                                                                                             v-model="state.form.name"
-                                                                                             :style="fontStyle"/>
+                    <span class="ptag" style="color: red">⦁</span> {{ $t('name') }} : <input
+                        class="input-element"
+                        v-model="state.form.name"
+                        required
+                        :style="fontStyle"/>
                 </div>
                 <div class="inner-grid">
                     <span class="ptag" style="color: red">⦁</span> {{ $t('company') }} : <input class="input-element"
@@ -32,7 +33,6 @@
                 </div>
                 <div class="inner-grid">
                     <span class="ptag" style="color: red">⦁</span> {{ $t('phone') }} : <input class="input-element"
-                                                                                              :class="{'input-danger': emailHasError }"
                                                                                               v-model="state.form.phone"
                                                                                               :style="fontStyle"/>
                 </div>
@@ -70,7 +70,8 @@
             <br>
             <div class="submit-buttons">
                 <img src="../../public/img/disable_submit_btn.png" v-if="!selected" class="submit-button">
-                <img src="../../public/img/submit_btn.png" v-if="selected" class="submit-button" @click="submit">
+                <img src="../../public/img/submit_btn.png" v-if="selected" class="submit-button"
+                     @click.prevent="submit">
             </div>
         </div>
         <div class="footer-logo">
@@ -98,27 +99,45 @@ export default {
                 phone: "",
                 industry: "",
                 branchId: router.currentRoute.value.query.branchId
-            }
+            },
+            showErrorMessage: false
         })
 
         const submit = () => {
+            const missingFields = []
+
+            if (state.form.name === "") {
+                missingFields.push("Name")
+            }
+            if (state.form.company === "") {
+                missingFields.push("Company")
+            }
+            if (state.form.email === "") {
+                missingFields.push("Email")
+            }
+            if (state.form.phone === "") {
+                missingFields.push("Mobile")
+            }
+            if (state.form.industry === "") {
+                missingFields.push("Industry")
+            }
+            if (missingFields.length > 0) {
+                window.alert("Please fill in the following fields: " + missingFields.join(", "))
+            } else {
             axios.post("/api/submit", state.form).then((res) => {
-                console.log ('submit params test : ', state.form.branchId)
                 if (res.data) {
-                    /*const Params = { state: JSON.stringify(state.form)}
-                    console.log('params : ', Params)*/
-                    /*router.push({name: 'success'});*/
                     router.push({name: 'imageUpload', query: {branchId: state.form.branchId}, state: state.form});
                 } else {
                     router.push({name: 'duplicate', query: {branchId: state.form.branchId}});
                 }
             })
+            }
+
         }
         return {state, submit}
     },
     data() {
         return {
-            modalActive: false,
             selected: false, //radio 버튼의 디폴트 값 설정
             true: true,
             false: false,
@@ -131,16 +150,12 @@ export default {
     },
     methods: {
         checkemail() {
-            console.log('checkEmail start')
-            const validateEmail = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-Za-z0-9\\-]+/
-            console.log('checkEmail 1')
-            if (!validateEmail.test(this.email) || !this.email) {
-                console.log('checkEmail 2')
+            const validateEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+            if (!validateEmail.test(this.state.form.email) || !this.state.form.email) {
                 this.valid.email = true
                 this.emailHasError = true
                 return
             }
-            console.log('checkEmail 3')
             this.valid.email = false
             this.emailHasError = false
         }
@@ -168,14 +183,12 @@ export default {
                 }
             }
         },
-    }/*,
+    },
     watch: {
         'state.form.email': function () {
-            console.log('watch start')
             this.checkemail()
-            console.log('watch end')
         }
-    }*/
+    }
 }
 </script>
 
