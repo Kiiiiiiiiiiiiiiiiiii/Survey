@@ -1,6 +1,6 @@
 <template>
     <div class="image-upload-container">
-        <input type="file" ref="fileInput" style="display: none" @change="uploadImage">
+        <input type="file" ref="fileInput" style="display: none" @change="uploadImage" accept="image/jpeg, image/png">
         <div class="img-con">
             <div class="namecard">
                 <img class="namecard-img" src="../../public/img/namecard.png">
@@ -16,9 +16,9 @@
                 <img class="skip-button-img" @click="skip" src="../../public/img/skip_btn.png">
             </div>
         </div>
-        <div class="logo">
-            <Footer/>
-        </div>
+    </div>
+    <div class="footer-logo">
+        <Footer/>
     </div>
 </template>
 <script>
@@ -46,16 +46,20 @@ export default {
         },
         uploadImage(event) {
           const file = event.target.files[0];
-          const reader = new FileReader();
+          if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
+              const reader = new FileReader();
 
-          reader.onload = (e) => {
-              this.imageUrl = e.target.result
-          };
+              reader.onload = (e) => {
+                  this.imageUrl = e.target.result
+              };
 
-          if(file) {
-              reader.readAsDataURL(file);
+              if (file) {
+                  reader.readAsDataURL(file);
+              }
+              this.saveImage(file)
+          } else {
+              window.alert("Please select a valid JPEG or PNG image file.")
           }
-          this.saveImage(file)
         },
         saveImage(event) {
             const file = event;
@@ -193,11 +197,29 @@ export default {
     max-width: 100%; /* 이미지가 부모 너비에 맞게 크기 조절됨 */
     max-height: 100%; /* 이미지가 부모 높이에 맞게 크기 조절됨 */
 }
-.logo {
+/*.logo {
     width: 55vw;
     height: 7vh;
     position: fixed;
     bottom: 0;
+}*/
+.footer-logo {
+    /*width: 40vw;
+    height: 7vh;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;*/
+    width: 40vw;
+    height: 7vh;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .conetent-text {
     font-size: 4vw;

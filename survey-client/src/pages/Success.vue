@@ -10,9 +10,9 @@
             <br>
             <p class="bold-text" :style="fontStyleBold">{{ $t('thx') }}</p>
         </div>
-        <div class="footer-logo">
-            <Footer/>
-        </div>
+    </div>
+    <div class="footer-logo">
+        <Footer/>
     </div>
 </template>
 
@@ -87,11 +87,29 @@ export default {
     width: 55%;
 }
 
-.footer-logo {
+/*.footer-logo {
     width: 40vw;
     height: 7vh;
     position: fixed;
     bottom: 0;
+}*/
+.footer-logo {
+    /*width: 40vw;
+    height: 7vh;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;*/
+    width: 40vw;
+    height: 7vh;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .conetent-text {

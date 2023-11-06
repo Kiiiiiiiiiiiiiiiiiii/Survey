@@ -29,15 +29,17 @@ export default {
     justify-content: center;
     width: 100vw;
     height: 100vh; /* 전체 화면 높이 */
-    background-color: #fff; /* 원하는 배경색으로 설정 */
+    overflow: hidden; /* 이미지 넘침을 숨깁니다. */
+    /*position: relative;*/
+
 }
 .res_img{
     position: absolute;
-    top: 0;
-    left: 0;
+ /*   object-fit: contain;*/
+    /*top: 0;
+    left: 0;*/
     width: 100%;
     height: 100%;
-    background-color: #fff; /* 로딩 이미지가 표시되는 동안 화면을 덮을 색상 */
     display: flex;
     justify-content: center;
     align-items: center;

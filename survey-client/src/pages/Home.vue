@@ -74,9 +74,9 @@
                      @click.prevent="submit">
             </div>
         </div>
-        <div class="footer-logo">
-            <Footer/>
-        </div>
+    </div>
+    <div class="footer-logo">
+        <Footer/>
     </div>
 </template>
 
@@ -228,7 +228,7 @@ export default {
 
 .inner-grid {
     display: grid;
-    grid-template-columns: 1fr 6fr 12fr;
+    grid-template-columns: 1fr 8fr 14fr;
     text-align: left;
     align-items: center; /* 텍스트를 수직으로 가운데 정렬 */
     /*place-items: center; !* 수직 및 수평 가운데 정렬 *!*/
@@ -277,13 +277,22 @@ export default {
 }
 
 .footer-logo {
-    width: 40vw;
+    /*width: 40vw;
     height: 7vh;
     position: fixed;
     bottom: 0;
     justify-content: center;
     align-items: center;
+    display: flex;*/
+    width: 40vw;
+    height: 7vh;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .flex-container {
