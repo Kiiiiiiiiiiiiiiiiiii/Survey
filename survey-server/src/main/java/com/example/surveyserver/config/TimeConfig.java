@@ -21,4 +21,13 @@ public class TimeConfig {
 
         return parseDate;
     }
+
+    @Bean
+    public Date getFormatTime() throws ParseException {
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parseDate = df.parse(df.format(date));
+
+        return parseDate;
+    }
 }
