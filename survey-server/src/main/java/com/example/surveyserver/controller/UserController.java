@@ -38,8 +38,8 @@ public class UserController {
     @Transactional
     public Boolean submit(@RequestBody Map<String, String> params) throws ParseException {
         String userEmail = params.get("email");
-        if (!checkEmail(userEmail)) {
-            int branchId = Integer.parseInt(params.get("branchId"));
+        int branchId = Integer.parseInt(params.get("branchId"));
+        if (!checkEmail(userEmail, branchId)) {
             Branch branch = branchRepository.findById(branchId);
             String branchCode = branch.getCode();
 
@@ -48,7 +48,7 @@ public class UserController {
             newUser.setCompany(params.get("company"));
             newUser.setEmail(userEmail);
             newUser.setIndustry(params.get("industry"));
-            newUser.setDateCreated(timeConfig.getVTNTime());
+            newUser.setDateCreated(timeConfig.getFormatTime());
             newUser.setBranchId(branchId);
             newUser.setBranchCode(branchCode);
             newUser.setPhone(params.get("phone"));
@@ -58,35 +58,9 @@ public class UserController {
         return false;
     }
 
-    @PostMapping("/api/filesubmit")
-    @Transactional
-    public Boolean filesubmit(@RequestBody Map<String, String> formData, @RequestPart MultipartFile imageFile) throws ParseException {
-        System.out.println("success");
-        /*String userEmail = params.get("email");
-        if (!checkEmail(userEmail)) {
-            int branchId = Integer.parseInt(params.get("branchId"));
-            Branch branch = branchRepository.findById(branchId);
-            String branchName = branch.getName();
-
-            User newUser = new User();
-            newUser.setName(params.get("name"));
-            newUser.setCompany(params.get("company"));
-            newUser.setEmail(userEmail);
-            newUser.setIndustry(params.get("industry"));
-            newUser.setDateCreated(timeConfig.getVTNTime());
-            newUser.setBranchId(branchId);
-            newUser.setBranchName(branchName);
-            newUser.setPhone(params.get("phone"));
-            newUser.setImage(params.get("image"));
-            userRepository.save(newUser);
-            return true;
-        }*/
-        return false;
-    }
-
     @PostMapping("/api/check")
-    public boolean checkEmail(String email) {
-        User user = userRepository.findByEmail(email);
+    public boolean checkEmail(String email, int branchId) {
+        User user = userRepository.findByEmailAndBranchId(email, branchId);
         if (user != null) {
             return true;
         }
@@ -175,7 +149,7 @@ public class UserController {
                 File imageFile = new File(directory, returnFileName);
                 image.transferTo(imageFile);
 
-                User user = userRepository.findByEmail(email);
+                User user = userRepository.findByEmailAndBranchId(email, branchId);
                 Image newImage = new Image();
 
                 newImage.setName(returnFileName);

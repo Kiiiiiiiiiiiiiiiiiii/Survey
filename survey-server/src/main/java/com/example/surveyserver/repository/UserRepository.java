@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     /**이메일 중복 체크*/
-    User findByEmail(String email);
+    User findByEmailAndBranchId(String email, int branchId);
+    User findByNameAndEmail(String name, String email);
 
     /**유저 전체 카운트*/
     Long countAllBy();
