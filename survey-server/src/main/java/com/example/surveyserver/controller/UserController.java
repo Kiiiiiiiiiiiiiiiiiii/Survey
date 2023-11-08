@@ -31,6 +31,12 @@ public class UserController {
     @Autowired
     TimeConfig timeConfig;
 
+    /***
+     * 개인정보수집 저장
+     * @param params
+     * @return
+     * @throws ParseException
+     */
     @PostMapping("/api/submit")
     @Transactional
     public Boolean submit(@RequestBody Map<String, String> params) throws ParseException {
@@ -55,6 +61,12 @@ public class UserController {
         return false;
     }
 
+    /***
+     * 분관별 중복이메일 체크
+     * @param email
+     * @param branchId
+     * @return
+     */
     @PostMapping("/api/check")
     public boolean checkEmail(String email, int branchId) {
         User user = userRepository.findByEmailAndBranchId(email, branchId);
@@ -64,59 +76,11 @@ public class UserController {
         return false;
     }
 
-    /**
-     * 전체 등록 유저수 조회
-     *
-     * @return result
+    /***
+     * 해당 분관 전체 이용자 정보
+     * @param branchId
+     * @return
      */
-    @GetMapping("/api/total")
-    public long resultTotal() {
-        long result = 0;
-        result = userRepository.countAllBy();
-
-        return result;
-    }
-
-    @GetMapping("/api/today")
-    public long resultDaily() {
-        long result = 0;
-        Date now = new Date();
-        result = userRepository.countAllByDateCreatedBetween(DateUtils.clearDate(now), DateUtils.clearDate(DateUtils.addDay(now, 1)));
-
-        return result;
-    }
-
-    @GetMapping("/api/stat")
-    public Object resultTest() {
-        Map<String, Long> results = new HashMap<String, Long>();
-
-        long krTotalCnt = 0;
-        long vnTotalCnt = 0;
-        long krDailyCnt = 0;
-        long vnDailyCnt = 0;
-        Date now = new Date();
-
-        krTotalCnt = userRepository.countAllByBranchId(1);
-        vnTotalCnt = userRepository.countAllByBranchId(2);
-        krDailyCnt = userRepository.countAllByDateCreatedBetweenAndBranchId(DateUtils.clearDate(now), DateUtils.clearDate(DateUtils.addDay(now, 1)), 1);
-        vnDailyCnt = userRepository.countAllByDateCreatedBetweenAndBranchId(DateUtils.clearDate(now), DateUtils.clearDate(DateUtils.addDay(now, 1)), 2);
-
-        results.put("krTotalCnt", krTotalCnt);
-        results.put("vnTotalCnt", vnTotalCnt);
-        results.put("krDailyCnt", krDailyCnt);
-        results.put("vnDailyCnt", vnDailyCnt);
-
-        return results;
-    }
-
-    @GetMapping("/api/getAllUserData")
-    public List<User> getAllData() {
-        List<User> results;
-        results = userRepository.findAllBy();
-
-        return results;
-    }
-
     @GetMapping("/api/getBranchUser")
     public List<User> getBranchUser(@RequestParam("branchId") int branchId) {
         List<User> results;
@@ -125,14 +89,19 @@ public class UserController {
         return results;
     }
 
-
+    /***
+     * 이미지 저장
+     * @param image
+     * @param email
+     * @param branchId
+     * @return
+     */
     @PostMapping("/api/imageUpload")
     public String uploadImage(@RequestParam("image") MultipartFile image, @RequestParam("email") String email, @RequestParam("branchId") int branchId) {
         if (!image.isEmpty()) {
             try {
                 Branch branch = branchRepository.findById(branchId);
                 // 이미지를 저장할 디렉토리 경로 설정
-                /*String directoryPath = "C:\\Users\\JB\\Documents\\namecardimgs";*/
                 String directoryPath = branch.getImgPath();
                 File directory = new File(directoryPath);
                 if (!directory.exists()) {
@@ -140,7 +109,6 @@ public class UserController {
                 }
 
                 // 이미지 파일 저장
-                /*File imageFile = new File(directory, image.getOriginalFilename());*/
                 String extension = StringUtils.getFilenameExtension(image.getOriginalFilename());
                 String returnFileName = email + '.' + extension;
                 File imageFile = new File(directory, returnFileName);
@@ -165,6 +133,12 @@ public class UserController {
             return "업로드할 이미지를 선택하세요.";
         }
     }
+
+    /***
+     * 관리자 로그인
+     * @param params
+     * @return
+     */
     @PostMapping("/api/login")
     public boolean login(@RequestBody Map<String, String> params) {
         User checkUser = userRepository.findByNameAndEmail(params.get("name"), params.get("email"));
