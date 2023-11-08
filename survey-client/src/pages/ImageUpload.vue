@@ -46,7 +46,7 @@ export default {
         },
         uploadImage(event) {
           const file = event.target.files[0];
-          if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
+          if (file && (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg')) {
               const reader = new FileReader();
 
               reader.onload = (e) => {
@@ -58,7 +58,7 @@ export default {
               }
               this.saveImage(file)
           } else {
-              window.alert("Please select a valid JPEG or PNG image file.")
+              window.alert("Please select a valid JPG or JPEG or PNG image file.")
           }
         },
         saveImage(event) {
