@@ -1,6 +1,7 @@
 <template>
     <h1>Dashboard Summary </h1>
-    <div class="table-container">
+    <br>
+    <div class="result-table-container">
         <table>
             <thead>
             <th>행사명</th>
@@ -10,7 +11,7 @@
             <th>NameCard 다운로드</th>
             </thead>
             <tbody>
-            <tr v-for="item in branches" :key="item.id">
+            <tr v-for="(item, index) in branches" :key="item.id" :class="{ 'odd-row': index % 2 === 1, 'even-row': index % 2 === 0 }">
                 <td>{{ item.name }}</td>
                 <td>{{ item.todayCnt }}</td>
                 <td>{{ item.totalCnt }}</td>
@@ -42,18 +43,6 @@ export default {
         };
     },
     methods: {
-        getTodayStat(branchId) {
-            axios.get('/api/stat', {
-                params: {
-                    branchId: branchId
-                }
-            }).then(res => {
-                this.todayData = res.data;
-            })
-                .catch(error => {
-                    console.log(error);
-                })
-        },
         refreshData() {
             this.showLangBtn = false
             //페이지 새로고침 시 호출될 api
@@ -127,28 +116,38 @@ export default {
 </script>
 
 <style scoped>
-.grid-container {
-    border-collapse: collapse; /* 테두리가 겹치지 않도록 설정 */
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2x2 그리드 생성 */
-    gap: 10px; /* 그리드 아이템 간의 간격 설정 */
-    text-align: center;
+.result-table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    background-color: coral;
+    margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 자동으로 설정합니다. */
+}
+.result-table-container table {
+    width: 100%; /* 테이블이 부모 요소의 너비를 가득 채우도록 설정합니다. */
+    /* 기존 스타일 유지 */
 }
 
-.table-container th, .table-container td {
+.result-table-container th {
     border: 2px solid #000; /* 테두리 스타일 설정 */
-    border-radius: 100%; /* 테두리를 둥글게 만드는 속성 */
+    background-color: #CD1039; /* 원하는 색상으로 변경하세요. */
+    text-align: center;
+    color: white; /* 텍스트 색상을 조정하세요. */
+}
+
+.result-table-container td {
+    border: 2px solid #000; /* 테두리 스타일 설정 */
     padding: 8px; /* 내용과 테두리 간격 설정 */
     text-align: center;
+    margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 자동으로 설정합니다. */
 }
 
-.excel-button {
-    text-align: center;
+.odd-row {
+    background-color: #FFA2AD; /* 홀수 행에 핑크색 배경 적용 */
 }
 
-.img-button {
-    text-align: center;
+.even-row {
+    background-color: #FFC5D0; /* 짝수 행에 흰색 배경 적용 */
 }
+
 </style>
