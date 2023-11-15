@@ -54,12 +54,12 @@
                 <br>
                 <br>
                 <div class="flex-container">
-                    <div class="flex-item-disagree">
+                    <div class="flex-item-agree">
                         <input type="radio" v-bind:value="true" v-model="selected">
                         <label for="one">{{ $t('agree') }}</label>
                     </div>
                     <span></span>
-                    <div class="flex-item-agree">
+                    <div class="flex-item-disagree">
                         <input type="radio" v-bind:value="false" v-model="selected">
                         <label for="one">{{ $t('disagree') }}</label>
                     </div>
@@ -211,6 +211,19 @@ export default {
     place-items: self-start; /* 수직 및 수평 가운데 정렬 */
 }
 
+@media only screen and (max-width: 280px){
+    .grid-container {
+        display: grid;
+        /* grid-template-columns: 2fr 2fr; !* 2x2 그리드 생성 *!*/
+        grid-template-rows: 1fr 1fr; /* 2개의 행을 생성 */
+        gap: 20px; /* 그리드 아이템 간의 간격 설정 */
+        padding-left: 14vw;
+        text-align: left;;
+        place-items: self-start; /* 수직 및 수평 가운데 정렬 */
+        font-size: 4vw;
+    }
+}
+
 .inner-grid {
     display: grid;
     grid-template-columns: 1fr 8fr 14fr;
@@ -246,16 +259,6 @@ export default {
     text-align: center;
 }
 
-.input-danger {
-    border-bottom: 1px solid $color-error !important;
-}
-
-.input-error {
-    line-height: 16px;
-    font-size: 11px;
-    color: $color-error;
-}
-
 .submit-button {
     width: 40%;
     height: auto;
@@ -286,12 +289,18 @@ export default {
 }
 
 .flex-item-disagree {
-    width: 50%; /* 각 div의 너비를 조절하여 간격을 만듭니다. */
+    width: 80vw; /* 각 div의 너비를 조절하여 간격을 만듭니다. */
     /*border: 1px solid #000; !* 각 div에 테두리 추가 (옵션) *!*/
+}
+@media only screen and (max-width: 280px){
+    .flex-item-disagree {
+        width: 90vw; /* 각 div의 너비를 조절하여 간격을 만듭니다. */
+        /*border: 1px solid #000; !* 각 div에 테두리 추가 (옵션) *!*/
+    }
 }
 
 .flex-item-agree {
-    width: 50%; /* 각 div의 너비를 조절하여 간격을 만듭니다. */
+    width: 80%; /* 각 div의 너비를 조절하여 간격을 만듭니다. */
     /*border: 1px solid #000; !* 각 div에 테두리 추가 (옵션) *!*/
 }
 
