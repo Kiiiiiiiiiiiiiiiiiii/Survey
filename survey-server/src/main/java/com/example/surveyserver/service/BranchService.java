@@ -24,7 +24,7 @@ public class BranchService {
         for (int i = 0; i < branches.size(); i++) {
             Map<String, Object> dataList = new HashMap<>();
             long todayCnt = userRepository.countAllByDateCreatedBetweenAndBranchId(DateUtils.clearDate(now), DateUtils.clearDate(DateUtils.addDay(now, 1)), branches.get(i).getId());
-            long totalCnt = userRepository.countAllByBranchId(branches.get(i).getId());
+            long totalCnt = userRepository.countAllByBranchIdAndIsAdmin(branches.get(i).getId(), 0);
             dataList.put("id", branches.get(i).getId());
             dataList.put("name", branches.get(i).getName());
             dataList.put("code", branches.get(i).getCode());

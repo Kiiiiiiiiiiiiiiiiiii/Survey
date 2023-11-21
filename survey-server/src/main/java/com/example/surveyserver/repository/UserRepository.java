@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Long countAllByDateCreatedBetweenAndBranchId(Date date1, Date date2, int branchId);
 
     /**유저 분관별 전체카운트*/
-    Long countAllByBranchId(int branchId);
+    Long countAllByBranchIdAndIsAdmin(int branchId, int isAdmin);
 
     List<User> findAllBy();
     List<User> findAllByBranchId(int branchId);
