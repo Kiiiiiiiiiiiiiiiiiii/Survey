@@ -1,6 +1,5 @@
 package com.example.surveyserver.service;
 
-import com.example.surveyserver.config.TimeConfig;
 import com.example.surveyserver.entity.Branch;
 import com.example.surveyserver.entity.Image;
 import com.example.surveyserver.entity.User;
@@ -28,9 +27,6 @@ public class UserService {
 
     @Autowired
     private ImageRepository imageRepository;
-
-    @Autowired
-    private TimeConfig timeConfig;
 
     public Boolean submit(Map<String, String> params) throws ParseException {
         String userEmail = params.get("email");
