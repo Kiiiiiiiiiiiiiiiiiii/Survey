@@ -32,9 +32,10 @@ export default {
 
 <style scoped>
 .app-main-container {
-    overflow: hidden; /* 스크롤을 숨깁니다. */
+    overflow: auto; /* 세로 스크롤을 추가합니다. */
     position: fixed;
     width: 100%;
+
 }
 
 </style>

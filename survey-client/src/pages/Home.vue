@@ -11,14 +11,14 @@
         <br>
     </div>
     <div class="home-main-container">
-        <div>
+        <div class="home-child-container">
             <div class="grid-container" :style="fontStyleBold">
                 <div class="inner-grid">
                     <span class="ptag" style="color: red">⦁</span> {{ $t('name') }} : <input
-                        class="input-element"
-                        v-model="state.form.name"
-                        required
-                        :style="fontStyle"/>
+                    class="input-element"
+                    v-model="state.form.name"
+                    required
+                    :style="fontStyle"/>
                 </div>
                 <div class="inner-grid">
                     <span class="ptag" style="color: red">⦁</span> {{ $t('company') }} : <input class="input-element"
@@ -72,10 +72,10 @@
                 <img src="../../public/img/submit_btn.png" v-if="selected" class="submit-button"
                      @click.prevent="submit">
             </div>
+            <div class="footer-logo">
+                <Footer/>
+            </div>
         </div>
-    </div>
-    <div class="footer-logo">
-        <Footer/>
     </div>
 </template>
 
@@ -132,7 +132,7 @@ export default {
 
         }
         function checkemail() {
-            const validateEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            const validateEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             if (!validateEmail.test(state.form.email) || !state.form.email) {
                 window.alert("Please enter a valid email address.");
                 return false;
@@ -189,16 +189,15 @@ export default {
 }
 
 .home-main-container {
-    overflow: hidden; /* 스크롤을 숨깁니다. */
+    overflow-y: scroll; /* 세로 스크롤을 추가합니다. */
+    overflow-x: hidden; /* 가로 스크롤을 숨깁니다. */
     position: fixed;
     width: 100vw;
-    height: auto;
+    height: 100vh;
     /*    아래 3개 추가로 이미지 하단중앙에 고정*/
     justify-content: center;
     align-items: flex-start; /* 세로 정렬은 위쪽에 맞춥니다. */
     display: flex;
-
-
 }
 
 .grid-container {
@@ -251,18 +250,26 @@ export default {
     white-space: pre-wrap; /*\n을 줄바꿈으로 치환*/
     width: 80%;
     margin: 0 auto;
+    padding-bottom: 20px; /* 추가된 부분 */
 }
+
 
 .submit-buttons {
     justify-content: center;
     align-items: center;
     text-align: center;
+
+    z-index: 1;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px; /* 추가된 부분 */
 }
 
 .submit-button {
     width: 40%;
-    height: auto;
+    height: 30%;
 }
+
 
 .footer-logo {
     /*width: 40vw;
@@ -281,6 +288,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 .flex-container {
@@ -324,5 +332,8 @@ export default {
 .img {
     width: 70%; /* 이미지를 부모 요소 너비에 맞춤 */
     height: 80%;
+}
+.home-child-container{
+
 }
 </style>

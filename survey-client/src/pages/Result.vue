@@ -143,11 +143,11 @@ export default {
 }
 
 .odd-row {
-    background-color: #FFA2AD; /* 홀수 행에 핑크색 배경 적용 */
+    /*background-color: #FFA2AD; !* 홀수 행에 핑크색 배경 적용 *!*/
 }
 
 .even-row {
-    background-color: #FFC5D0; /* 짝수 행에 흰색 배경 적용 */
+    /*background-color: #FFC5D0; !* 짝수 행에 흰색 배경 적용 *!*/
 }
 
 </style>

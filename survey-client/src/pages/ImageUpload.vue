@@ -189,6 +189,8 @@ export default {
     align-items: center; /* 세로 중앙 정렬 추가 */
     max-width: 100%; /* 원하는 너비로 설정, 예: 50% */
     max-height: 100%; /* 원하는 높이로 설정, 예: 50% */
+    z-index: 1;
+    position: relative;
 }
 .skip-button-img {
     width: 30vw;
@@ -196,6 +198,8 @@ export default {
     text-align: center;
     max-width: 100%; /* 이미지가 부모 너비에 맞게 크기 조절됨 */
     max-height: 100%; /* 이미지가 부모 높이에 맞게 크기 조절됨 */
+    z-index: 0;
+    position: relative;
 }
 /*.logo {
     width: 55vw;
@@ -220,6 +224,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    z-index: -1;
 }
 .conetent-text {
     font-size: 4vw;
