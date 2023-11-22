@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 @Service
@@ -43,7 +44,7 @@ public class UserService {
             newUser.setCompany(params.get("company"));
             newUser.setEmail(userEmail);
             newUser.setIndustry(params.get("industry"));
-            newUser.setDateCreated(timeConfig.getFormatTime());
+            newUser.setDateCreated(new Date());
             newUser.setBranchId(branchId);
             newUser.setBranchCode(branchCode);
             newUser.setPhone(params.get("phone"));
