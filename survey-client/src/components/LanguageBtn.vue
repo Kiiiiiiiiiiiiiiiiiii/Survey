@@ -6,6 +6,7 @@
     </div>
 </template>
 <script>
+
 export default {
     data(){
         return {
@@ -25,6 +26,13 @@ export default {
             } else {
                 return false
             }
+        }
+    },
+    mounted() {
+        if (this.$route.query.branchId == 1) {
+            this.changeLocale('ko')
+        } else if (this.$route.query.branchId == 2) {
+            this.changeLocale('vn')
         }
     }
 }
