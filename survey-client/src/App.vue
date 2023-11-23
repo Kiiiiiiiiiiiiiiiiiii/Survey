@@ -35,7 +35,6 @@ export default {
     overflow: auto; /* 세로 스크롤을 추가합니다. */
     position: fixed;
     width: 100%;
-
 }
 
 </style>

@@ -49,10 +49,8 @@
 
             <div class="container-element-agree" :style="fontStyle">
                 <p></p>
-                <br>
                 <span class="consent-text">{{ $t('consent') }}</span>
-                <br>
-                <br>
+                <p></p>
                 <div class="flex-container">
                     <div class="flex-item-agree">
                         <input type="radio" v-bind:value="true" v-model="selected">
@@ -65,8 +63,7 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
+
             <div class="submit-buttons">
                 <img src="../../public/img/disable_submit_btn.png" v-if="!selected" class="submit-button">
                 <img src="../../public/img/submit_btn.png" v-if="selected" class="submit-button"
@@ -189,15 +186,23 @@ export default {
 }
 
 .home-main-container {
-    overflow-y: scroll; /* 세로 스크롤을 추가합니다. */
-    overflow-x: hidden; /* 가로 스크롤을 숨깁니다. */
+    /*overflow-y: scroll; !* 세로 스크롤을 추가합니다. *!
+    overflow-x: hidden; !* 가로 스크롤을 숨깁니다. *!
     position: fixed;
     width: 100vw;
     height: 100vh;
-    /*    아래 3개 추가로 이미지 하단중앙에 고정*/
+    !*    아래 3개 추가로 이미지 하단중앙에 고정*!
     justify-content: center;
-    align-items: flex-start; /* 세로 정렬은 위쪽에 맞춥니다. */
-    display: flex;
+    align-items: flex-start; !* 세로 정렬은 위쪽에 맞춥니다. *!
+    display: flex;*/
+    max-height: 100vh;
+    /*overflow-y: scroll;
+    overflow-x: hidden;*/
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .grid-container {
@@ -250,7 +255,7 @@ export default {
     white-space: pre-wrap; /*\n을 줄바꿈으로 치환*/
     width: 80%;
     margin: 0 auto;
-    padding-bottom: 20px; /* 추가된 부분 */
+    /*padding-bottom: 20px; !* 추가된 부분 *!*/
 }
 
 
@@ -258,7 +263,7 @@ export default {
     justify-content: center;
     align-items: center;
     text-align: center;
-
+    display: flex;
     z-index: 1;
     position: relative;
     margin-top: 20px;
@@ -266,8 +271,9 @@ export default {
 }
 
 .submit-button {
-    width: 40%;
-    height: 30%;
+    display: flex;
+    width: 35%;
+    height: 25%;
 }
 
 
