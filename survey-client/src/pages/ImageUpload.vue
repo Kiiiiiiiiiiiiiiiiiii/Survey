@@ -1,6 +1,7 @@
 <template>
     <div class="image-upload-container">
         <input type="file" ref="fileInput" style="display: none" @change="uploadImage" accept="image/jpeg, image/png">
+        <UploadSpinner :is-visible="uploading" />
         <div class="img-con">
             <div class="namecard">
                 <img class="namecard-img" src="../../public/img/namecard.png">
@@ -26,9 +27,10 @@
 import {useRouter} from 'vue-router';
 import axios from 'axios';
 import Footer from "@/components/Footer.vue";
+import UploadSpinner from "@/components/UploadSpinner.vue";
 
 export default {
-    components: {Footer},
+    components: {Footer, UploadSpinner},
     setup() {
         const router = useRouter();
         return {router}
@@ -37,7 +39,8 @@ export default {
       return {
           imageUrl: null,
           nowlocale: 'en',
-          branchId: this.$route.query.branchId
+          branchId: this.$route.query.branchId,
+          uploading: false
       }
     },
     methods: {
@@ -68,8 +71,15 @@ export default {
             formData.append('email', history.state.email);
             formData.append('branchId', history.state.branchId);
 
+            if (this.uploading) {
+                return
+            }
+
+            this.uploading = true;
+
 
             axios.post("/api/imageUpload", formData).then((res) => {
+                this.uploading = false;
                 if (res.data) {
                     this.router.push({name: 'success', query: {branchId: history.state.branchId}});
                     console.log('upload success')
@@ -229,5 +239,15 @@ export default {
 }
 .conetent-text {
     font-size: 4vw;
+}
+
+.upload-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
 }
 </style>
