@@ -31,7 +31,7 @@ public class UserService {
     public Boolean submit(Map<String, String> params) throws ParseException {
         String userEmail = params.get("email");
         int branchId = Integer.parseInt(params.get("branchId"));
-        if (!checkEmail(userEmail, branchId)) {
+        if (checkEmail(userEmail, branchId)) {
             Branch branch = branchRepository.findById(branchId);
             String branchCode = branch.getCode();
 
@@ -51,8 +51,12 @@ public class UserService {
     }
 
     public boolean checkEmail(String email, int branchId) {
-        User user = userRepository.findByEmailAndBranchId(email, branchId);
-        return user != null;
+        boolean check = true;
+        int cnt = userRepository.countByEmailAndAndBranchId(email, branchId);
+        if (cnt >= 1) {
+            check = false;
+        }
+        return check;
     }
 
     public List<User> getBranchUser(int branchId) {
