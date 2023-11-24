@@ -26,10 +26,9 @@
 import {useRouter} from 'vue-router';
 import axios from 'axios';
 import Footer from "@/components/Footer.vue";
-import UploadSpinner from "@/components/UploadSpinner.vue";
 
 export default {
-    components: {Footer, UploadSpinner},
+    components: {Footer},
     setup() {
         const router = useRouter();
         return {router}
