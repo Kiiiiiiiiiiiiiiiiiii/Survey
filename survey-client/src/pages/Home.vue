@@ -65,8 +65,8 @@
             </div>
 
             <div class="submit-buttons">
-                <img src="../../public/img/disable_submit_btn.png" v-if="!selected" class="submit-button">
-                <img src="../../public/img/submit_btn.png" v-if="selected" class="submit-button"
+                <img src="../../public/img/disable_submit_btn.png" v-if="!selected || state.isSubmitting" class="submit-button">
+                <img src="../../public/img/submit_btn.png" v-if="selected && !state.isSubmitting" class="submit-button"
                      @click.prevent="submit">
             </div>
             <div class="footer-logo">
@@ -95,10 +95,18 @@ export default {
                 phone: "",
                 industry: "",
                 branchId: router.currentRoute.value.query.branchId
-            }
+            },
+            isSubmitting: false
         })
 
         const submit = () => {
+            if (state.isSubmitting) {
+                // 이미 제출 중이면 여러 번 제출을 방지하기 위해 반환합니다.
+                return;
+            }
+
+            state.isSubmitting = true
+
             const missingFields = []
             if (state.form.name === "") {
                 missingFields.push("Name")
@@ -119,6 +127,7 @@ export default {
                 window.alert("Please fill in the following fields: " + missingFields.join(", "))
             } else if (checkemail()) {
                 axios.post("/api/submit", state.form).then((res) => {
+                    state.isSubmitting = false
                     if (res.data) {
                         router.push({name: 'imageUpload', query: {branchId: state.form.branchId}, state: state.form});
                     } else {
