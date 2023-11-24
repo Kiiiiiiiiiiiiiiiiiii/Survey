@@ -1,7 +1,6 @@
 <template>
     <div class="image-upload-container">
         <input type="file" ref="fileInput" style="display: none" @change="uploadImage" accept="image/jpeg, image/png">
-        <UploadSpinner :is-visible="uploading" />
         <div class="img-con">
             <div class="namecard">
                 <img class="namecard-img" src="../../public/img/namecard.png">
@@ -239,15 +238,5 @@ export default {
 }
 .conetent-text {
     font-size: 4vw;
-}
-
-.upload-spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
 }
 </style>
