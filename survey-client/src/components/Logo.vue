@@ -27,5 +27,11 @@ export default {
     max-width: 100%;
     height: auto;
     text-align: center;
-}
+
+  @media only screen and (max-height: 480px) {
+    .logo{
+      transform: scale(0.1);
+    }
+  }
+  }
 </style>

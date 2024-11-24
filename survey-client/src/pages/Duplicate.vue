@@ -76,7 +76,8 @@ export default {
 }
 
 .img {
-    width: 60%;
+    width: 50%;
+    height: auto;
 }
 
 /*.footer-logo {
@@ -111,5 +112,33 @@ export default {
 .bold-text {
     color: red;
     font-weight: bold;
+}
+@media only screen and (max-height: 480px) {
+  .footer-logo {
+    width: 20vw;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+}
+@media only screen and (max-height: 320px) {
+  .footer-logo {
+    width: 16vw;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
 }
 </style>

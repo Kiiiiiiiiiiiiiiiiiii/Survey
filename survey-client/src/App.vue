@@ -37,4 +37,14 @@ export default {
     width: 100%;
 }
 
+@media only screen and (max-height: 480px) {
+  .app-main-container {
+    overflow: auto; /* 세로 스크롤을 추가합니다. */
+    position: fixed;
+    width: 100%;
+    height: 25vh;
+
+  }
+}
+
 </style>

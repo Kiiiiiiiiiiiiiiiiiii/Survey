@@ -37,8 +37,7 @@ export default {
       return {
           imageUrl: null,
           nowlocale: 'en',
-          branchId: this.$route.query.branchId,
-          uploading: false
+          branchId: this.$route.query.branchId
       }
     },
     methods: {
@@ -69,15 +68,9 @@ export default {
             formData.append('email', history.state.email);
             formData.append('branchId', history.state.branchId);
 
-            if (this.uploading) {
-                return
-            }
-
-            this.uploading = true;
 
 
             axios.post("/api/imageUpload", formData).then((res) => {
-                this.uploading = false;
                 if (res.data) {
                     this.router.push({name: 'success', query: {branchId: history.state.branchId}});
                     console.log('upload success')
@@ -169,7 +162,7 @@ export default {
     /*margin: 3vh 0; !* 이미지 컬럼 사이의 세로 간격을 조절 *!*/
 }
 .namecard-img {
-    width: 50vw;
+    width: 40vw;
     height: auto;
     text-align: center;
     max-width: 100%; /* 이미지가 부모 너비에 맞게 크기 조절됨 */
@@ -184,12 +177,11 @@ export default {
     margin: 3vh 0; /* 이미지 컬럼 사이의 세로 간격을 조절 */
 }
 .upload-button-img {
-    width: 30vw;
+    width: 25vw;
     height: auto;
     text-align: center;
     max-width: 100%; /* 이미지가 부모 너비에 맞게 크기 조절됨 */
     max-height: 100%; /* 이미지가 부모 높이에 맞게 크기 조절됨 */
-
 }
 .skip-button {
     display: flex;
@@ -201,10 +193,10 @@ export default {
     position: relative;
 }
 .skip-button-img {
-    width: 30vw;
+    width: 25vw;
     height: auto;
     text-align: center;
-    max-width: 100%; /* 이미지가 부모 너비에 맞게 크기 조절됨 */
+    max-width: 90%; /* 이미지가 부모 너비에 맞게 크기 조절됨 */
     max-height: 100%; /* 이미지가 부모 높이에 맞게 크기 조절됨 */
     z-index: 0;
     position: relative;
@@ -237,5 +229,34 @@ export default {
 }
 .conetent-text {
     font-size: 4vw;
+}
+
+@media only screen and (max-height: 480px) {
+  .footer-logo {
+    width: 20vw;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+}
+@media only screen and (max-height: 320px) {
+  .footer-logo {
+    width: 16vw;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
 }
 </style>

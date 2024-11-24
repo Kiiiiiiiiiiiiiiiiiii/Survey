@@ -10,6 +10,7 @@ import imageUpload from "@/pages/ImageUpload.vue";
 import FrontImageKR from "@/pages/FrontImageKR.vue";
 import FrontImageVN from "@/pages/FrontImageVN.vue";
 import Login from "@/pages/Login.vue";
+import axios from "axios";
 
 
 const routes = [
@@ -18,11 +19,9 @@ const routes = [
     },
     {
         path: '/kr', name: 'FrontImageKR', component: FrontImageKR
-        /*path: '/kr', redirect: 'main?branchId=1'*/
     },
     {
         path: '/vn', name: 'FrontImageVN', component: FrontImageVN
-        /*path: '/vn', redirect: 'main?branchId=2'*/
     },
     {
         path: '/main', name: 'Home', component: Home
@@ -46,21 +45,12 @@ const routes = [
         path: '/:catchAll(.*)', redirect: 'main'
     }
 ]
-
+ axios.defaults.baseURL = "http://35.216.123.244:8080"
+/*axios.defaults.baseURL = "http://34.22.74.137:8080/survey-api"*/
+//axios.defaults.baseURL = "http://localhost:8080"
 const router = createRouter(({
-    history: createWebHistory(process.env.BACE_URL),
+    history: createWebHistory(process.env.BASE_URL),
     routes
 }))
-
-/*router.beforeEach((to, from, next) => {
-    console.log('start before')
-    const hideLanguageBtn = to.matched.some(record => record.meta.hideLanguageBtn);
-    console.log('start hideLanguageBtn : ', hideLanguageBtn)
-    if (hideLanguageBtn) {
-        next(false);
-    } else {
-        next();
-    }
-})*/
 
 createApp(App).use(router).use(i18n).mount('#app')
